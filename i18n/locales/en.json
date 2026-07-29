@@ -1,0 +1,48 @@
+{
+  "header": {
+    "menu": {
+      "open": "Open menu"
+    },
+    "cart": {
+      "label": "Cart"
+    }
+  },
+
+  "footer": {
+    "copyright": "All rights reserved."
+  },
+
+  "cart": {
+    "header": {
+      "title": "Cart",
+      "description": "Review selected products, check your cart and continue to the next step of your order."
+    },
+
+    "seo": {
+      "title": "Cart | Store name",
+      "description": "Review products in your cart, change quantities or remove items and proceed to checkout."
+    },
+
+    "steps": {
+      "cart": {
+        "title": "Cart",
+        "description": "Review selected products"
+      },
+
+      "data": {
+        "title": "Customer details",
+        "description": "Enter your details"
+      },
+
+      "payment": {
+        "title": "Payment",
+        "description": "Proceed to payment"
+      },
+
+      "delivery": {
+        "title": "Done",
+        "description": "Receive your order"
+      }
+    }
+  }
+}

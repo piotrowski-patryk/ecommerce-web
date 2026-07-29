@@ -1,0 +1,32 @@
+{
+  "name": "ecommerce-web-v1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-commerce frontend application built with Nuxt.",
+  "license": "UNLICENSED",
+  "author": "Patryk Piotrowski",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xdellta/ecommerce-web-v1.git"
+  },
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^4.10.0",
+    "@nuxtjs/color-mode": "^4.0.1",
+    "@nuxtjs/i18n": "^10.5.0",
+    "@pinia/nuxt": "^1.0.1",
+    "nuxt": "^4.5.0",
+    "pinia": "^4.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "vite-svg-loader": "^5.1.1"
+  }
+}

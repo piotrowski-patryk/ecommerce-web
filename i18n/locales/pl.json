@@ -1,0 +1,48 @@
+{
+  "header": {
+    "menu": {
+      "open": "Otwórz menu"
+    },
+    "cart": {
+      "label": "Koszyk"
+    }
+  },
+
+  "footer": {
+    "copyright": "Wszelkie prawa zastrzeżone."
+  },
+
+  "cart": {
+    "header": {
+      "title": "Koszyk",
+      "description": "Sprawdź wybrane produkty, zweryfikuj zawartość koszyka i przejdź do kolejnego etapu składania zamówienia."
+    },
+
+    "seo": {
+      "title": "Koszyk | Nazwa sklepu",
+      "description": "Przejrzyj produkty w koszyku, zmień ilość lub usuń wybrane pozycje i przejdź do finalizacji zamówienia."
+    },
+
+    "steps": {
+      "cart": {
+        "title": "Koszyk",
+        "description": "Sprawdź wybrane produkty"
+      },
+
+      "data": {
+        "title": "Dane klienta",
+        "description": "Uzupełnij swoje dane"
+      },
+
+      "payment": {
+        "title": "Płatność",
+        "description": "Przejdź do płatności"
+      },
+
+      "delivery": {
+        "title": "Gotowe",
+        "description": "Odbierz zamówienie"
+      }
+    }
+  }
+}

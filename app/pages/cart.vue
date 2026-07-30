@@ -83,7 +83,7 @@ const steps = computed(() => [
 
       <div class="flex flex-col gap-6 py-6 lg:flex-row lg:items-start">
         <CartList :items="cartItems" />
-        <CartSummary />
+        <CartSummary :next="next" />
       </div>
     </template>
 

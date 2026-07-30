@@ -2,6 +2,7 @@
   "common": {
     "loading": "Ładowanie...",
     "remove": "Usuń",
+    "next": "Dalej",
     "decrease": "Zmniejsz wartość",
     "increase": "Zwiększ wartość"
   },
@@ -57,7 +58,9 @@
     },
 
     "summary": {
-      "title": "Podsumowanie zamówienia"
+      "title": "Podsumowanie zamówienia",
+      "subtotal": "Wartość produktów",
+      "total": "Do zapłaty"
     }
   }
 }

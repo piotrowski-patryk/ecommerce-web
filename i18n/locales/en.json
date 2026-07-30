@@ -1,4 +1,11 @@
 {
+  "common": {
+    "loading": "Loading...",
+    "remove": "Remove",
+    "decrease": "Decrease value",
+    "increase": "Increase value"
+  },
+
   "header": {
     "menu": {
       "open": "Open menu"
@@ -15,23 +22,23 @@
   "cart": {
     "header": {
       "title": "Cart",
-      "description": "Review selected products, check your cart and continue to the next step of your order."
+      "description": "Check selected products, verify your cart contents, and proceed to the next step of placing your order."
     },
 
     "seo": {
-      "title": "Cart | Store name",
-      "description": "Review products in your cart, change quantities or remove items and proceed to checkout."
+      "title": "Cart | Store Name",
+      "description": "Review the items in your cart, change quantities or remove selected items, and proceed to finalize your order."
     },
 
     "steps": {
       "cart": {
         "title": "Cart",
-        "description": "Review selected products"
+        "description": "Check selected products"
       },
 
       "data": {
         "title": "Customer details",
-        "description": "Enter your details"
+        "description": "Fill in your details"
       },
 
       "payment": {

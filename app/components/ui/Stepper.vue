@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { StepperItem, StepperItemStatus } from './types'
+import type { StepperItem, StepperItemStatus } from '~/types/stepper'
 
 const props = defineProps<{
   items: StepperItem[]

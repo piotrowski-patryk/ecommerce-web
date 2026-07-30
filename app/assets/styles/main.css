@@ -1,5 +1,3 @@
-@import "@nuxt/ui";
-
 /* Base */
 @import './base/global.css';
 @import './base/fonts.css';

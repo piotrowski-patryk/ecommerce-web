@@ -1,4 +1,11 @@
 {
+  "common": {
+    "loading": "Ładowanie...",
+    "remove": "Usuń",
+    "decrease": "Zmniejsz wartość",
+    "increase": "Zwiększ wartość"
+  },
+
   "header": {
     "menu": {
       "open": "Otwórz menu"
@@ -13,11 +20,6 @@
   },
 
   "cart": {
-    "header": {
-      "title": "Koszyk",
-      "description": "Sprawdź wybrane produkty, zweryfikuj zawartość koszyka i przejdź do kolejnego etapu składania zamówienia."
-    },
-
     "seo": {
       "title": "Koszyk | Nazwa sklepu",
       "description": "Przejrzyj produkty w koszyku, zmień ilość lub usuń wybrane pozycje i przejdź do finalizacji zamówienia."
@@ -43,6 +45,19 @@
         "title": "Gotowe",
         "description": "Odbierz zamówienie"
       }
+    },
+
+    "header": {
+      "title": "Koszyk",
+      "description": "Sprawdź wybrane produkty, zweryfikuj zawartość koszyka i przejdź do kolejnego etapu składania zamówienia."
+    },
+
+    "list": {
+      "title": "Produkty w koszyku"
+    },
+
+    "summary": {
+      "title": "Podsumowanie zamówienia"
     }
   }
 }

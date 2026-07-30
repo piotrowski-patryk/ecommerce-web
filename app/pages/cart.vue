@@ -82,35 +82,8 @@ const steps = computed(() => [
       </header>
 
       <div class="flex flex-col gap-6 py-6 lg:flex-row lg:items-start">
-        <!-- Cart products -->
-        <section
-          class="flex-1"
-          aria-labelledby="cart-products-heading"
-        >
-          <h2
-            id="cart-products-heading"
-            class="mb-4 text-lg font-semibold"
-          >
-            Produkty w koszyku
-
-            <span class="text-sm font-normal text-muted-foreground">
-              ({{ cartItems.length }})
-            </span>
-          </h2>
-
-          <ul class="space-y-4">
-            <CartItem
-              v-for="item in cartItems"
-              :key="item.id"
-              :product="item"
-            />
-          </ul>
-        </section>
-
-        <!-- Cart summary -->
-        <article class="w-full lg:sticky lg:top-6 lg:w-96">
-          <button @click="next()">Dalej</button>
-        </article>
+        <CartList :items="cartItems" />
+        <CartSummary />
       </div>
     </template>
 

@@ -6,7 +6,6 @@ export default defineNuxtConfig({
 
   modules: [
     '@pinia/nuxt',
-    '@nuxt/ui',
     '@nuxtjs/i18n',
     '@nuxtjs/color-mode',
   ],
@@ -52,7 +51,6 @@ export default defineNuxtConfig({
 
   i18n: {
     defaultLocale: 'pl',
-
     strategy: 'prefix_except_default',
 
     locales: [

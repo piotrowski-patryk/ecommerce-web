@@ -1,13 +1,5 @@
 <script setup lang="ts">
-interface CartProduct {
-  id: number
-  name: string
-  price: number
-  quantity: number
-  image?: string
-  url?: string
-  attributes?: string
-}
+import type { CartProduct } from '~/types/cart';
 
 defineProps<{
   product: CartProduct
@@ -17,11 +9,7 @@ const { t } = useI18n()
 
 const localePath = useLocalePath()
 
-const formatPrice = (price: number) =>
-  new Intl.NumberFormat('pl-PL', {
-    style: 'currency',
-    currency: 'PLN',
-  }).format(price)
+const value = ref(5)
 </script>
 
 <template>
@@ -29,13 +17,13 @@ const formatPrice = (price: number) =>
     <!-- Product image -->
     <NuxtLink
       v-if="product.url"
-      :to="localePath(product.url)"
+      :to="localePath('')"
       class="row-span-2 block size-20 shrink-0 overflow-hidden md:row-span-1 md:size-24"
     >
       <img
         v-if="product.image"
         :src="product.image"
-        :alt="t('cart.productImage', { name: product.name })"
+        :alt="product.name"
         class="size-full object-contain"
       >
     </NuxtLink>
@@ -57,7 +45,7 @@ const formatPrice = (price: number) =>
       <h3 class="font-medium">
         <NuxtLink
           v-if="product.url"
-          :to="localePath(product.url)"
+          :to="localePath('')"
           class="hover:underline"
         >
           {{ product.name }}
@@ -78,7 +66,7 @@ const formatPrice = (price: number) =>
 
     <!-- Quantity -->
     <div class="col-start-3 row-start-2 justify-self-end text-sm text-muted-foreground md:col-start-3 md:row-start-auto md:justify-self-start">
-      <InputNumber />
+      <InputNumber v-model="value" :min="1" />
     </div>
 
     <!-- Price -->
@@ -89,8 +77,8 @@ const formatPrice = (price: number) =>
     <!-- Remove -->
     <button
       type="button"
-      class="col-start-3 row-start-1 self-start justify-self-end text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100 md:col-start-5 md:self-center"
-      :aria-label="t('cart.removeProduct', { name: product.name })"
+      class="cursor-pointer col-start-3 row-start-1 self-start justify-self-end text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100 md:col-start-5 md:self-center"
+      :aria-label="t('common.remove', { name: product.name })"
     >
       <Icon name="close" class="size-5" />
     </button>

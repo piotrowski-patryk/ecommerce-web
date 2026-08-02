@@ -7,38 +7,38 @@ defineProps<{
 </script>
 
 <template>
-  <article class="w-full lg:sticky lg:top-6 lg:w-96">
+  <aside class="w-full lg:sticky lg:top-6 lg:w-96">
+
     <h2 class="mb-4 text-lg font-semibold">
       {{ t('cart.summary.title') }}
     </h2>
 
-    <div class="bg-surface p-4">
+    <div class="bg-surface border border-border rounded-md p-6">
       <dl class="space-y-3 text-sm">
-        <div class="flex justify-between">
+        <div class="flex items-center justify-between gap-4">
           <dt class="text-muted-foreground">{{ t('cart.summary.subtotal') }}</dt>
           <dd class="font-medium">2 500 zł</dd>
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex items-center justify-between gap-4">
           <dt class="text-muted-foreground">{{ t('cart.summary.shipping') }}</dt>
           <dd class="font-medium">0 zł</dd>
         </div>
 
-        <div class="border-t border-border pt-3 flex justify-between text-base font-semibold">
+        <div class="flex items-center justify-between gap-4 border-t border-border pt-3 text-base font-semibold">
           <dt>{{ t('cart.summary.total') }}</dt>
           <dd>2 500 zł</dd>
         </div>
       </dl>
 
-      <div class="mt-6">
-        <Button
-          variant="primary"
-          class="w-full"
-          @click="next"
-        >
-          {{ t('common.next') }}: {{ t('cart.steps.data.title') }}
-        </Button>
-      </div>
+      <Button
+        @click="next"
+        variant="primary"
+        class="w-full mt-6"
+      >
+        {{ t('common.next') }}: {{ t('cart.steps.data.title') }}
+      </Button>
+
     </div>
-  </article>
+  </aside>
 </template>

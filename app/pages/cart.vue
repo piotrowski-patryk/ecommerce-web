@@ -87,6 +87,14 @@ const steps = computed(() => [
       </div>
     </template>
 
-    <template #data></template>
+    <template #data>
+      <Modal title="Tytuł jakiś">
+        <Button>Otwórz pełny ekran</Button>
+
+        <template #body>
+          <p>Zawartość wyświetlana na pełnym ekranie...</p>
+        </template>
+      </Modal>
+    </template>
   </Stepper>
 </template>

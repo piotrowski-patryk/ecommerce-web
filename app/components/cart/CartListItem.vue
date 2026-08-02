@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import type { CartProduct } from '~/types/cart';
+import type { CartProduct } from '~/types/cart'
 
 defineProps<{
   product: CartProduct
 }>()
 
 const { t } = useI18n()
-
 const localePath = useLocalePath()
 
 const value = ref(5)
 </script>
 
 <template>
-  <li class="group bg-surface grid grid-cols-[auto_1fr_auto] grid-rows-[auto_auto] items-center gap-x-4 gap-y-2 p-4 md:grid-cols-[auto_1fr_auto_auto_auto] md:grid-rows-1 md:gap-y-0">
+  <div class="group grid grid-cols-[auto_1fr_auto] grid-rows-[auto_auto] items-center gap-x-4 gap-y-2 rounded-md border border-border bg-surface p-4 md:grid-cols-[auto_1fr_auto_auto_auto] md:grid-rows-1 md:gap-y-0">
     <!-- Product image -->
     <NuxtLink
       v-if="product.url"
@@ -77,10 +76,10 @@ const value = ref(5)
     <!-- Remove -->
     <button
       type="button"
-      class="cursor-pointer col-start-3 row-start-1 self-start justify-self-end text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100 md:col-start-5 md:self-center"
+      class="col-start-3 row-start-1 cursor-pointer self-start justify-self-end text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100 md:col-start-5 md:self-center"
       :aria-label="t('common.remove', { name: product.name })"
     >
       <Icon name="close" class="size-5" />
     </button>
-  </li>
+  </div>
 </template>

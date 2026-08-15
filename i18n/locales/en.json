@@ -2,8 +2,28 @@
   "common": {
     "loading": "Loading...",
     "remove": "Remove",
+    "next": "Next",
     "decrease": "Decrease value",
     "increase": "Increase value"
+  },
+
+  "errors": {
+    "default": "An unexpected error occurred",
+    "400": "Invalid request",
+    "401": "Authentication required",
+    "403": "Access denied",
+    "404": "Resource not found",
+    "405": "Method not allowed",
+    "408": "Request timeout",
+    "409": "Data conflict",
+    "410": "Resource unavailable",
+    "422": "Invalid data",
+    "423": "Resource locked",
+    "429": "Too many requests. Please try again shortly",
+    "500": "Server error. Please try again",
+    "502": "Server unavailable",
+    "503": "Service temporarily unavailable",
+    "504": "Server response timed out"
   },
 
   "header": {
@@ -20,25 +40,20 @@
   },
 
   "cart": {
-    "header": {
-      "title": "Cart",
-      "description": "Check selected products, verify your cart contents, and proceed to the next step of placing your order."
-    },
-
     "seo": {
       "title": "Cart | Store Name",
-      "description": "Review the items in your cart, change quantities or remove selected items, and proceed to finalize your order."
+      "description": "Review the products in your cart, change quantities or remove selected items, and proceed to checkout."
     },
 
     "steps": {
       "cart": {
         "title": "Cart",
-        "description": "Check selected products"
+        "description": "Review selected products"
       },
 
       "data": {
         "title": "Customer details",
-        "description": "Fill in your details"
+        "description": "Enter your details"
       },
 
       "payment": {
@@ -50,6 +65,21 @@
         "title": "Done",
         "description": "Receive your order"
       }
+    },
+
+    "header": {
+      "title": "Cart",
+      "description": "Review your selected products, check your cart contents, and proceed to the next step of your order."
+    },
+
+    "list": {
+      "title": "Products in cart"
+    },
+
+    "summary": {
+      "title": "Order summary",
+      "subtotal": "Product subtotal",
+      "total": "Total"
     }
   }
 }

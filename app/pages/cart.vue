@@ -1,12 +1,12 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 defineI18nRoute({
   paths: {
     pl: '/koszyk',
     en: '/cart',
   },
 })
+
+const { t } = useI18n()
 
 useSeoMeta({
   title: () => t('cart.seo.title'),
@@ -15,26 +15,7 @@ useSeoMeta({
   ogDescription: () => t('cart.seo.description'),
 })
 
-const cartItems = [
-  {
-    id: 1,
-    name: 'Profesjonalna strona internetowa',
-    price: 2500,
-    quantity: 1,
-    image: 'https://placehold.co/400x400?text=Website',
-    url: '/produkty/strona-internetowa',
-    attributes: 'Responsywna strona WWW + CMS',
-  },
-  {
-    id: 2,
-    name: 'Optymalizacja SEO',
-    price: 800,
-    quantity: 1,
-    image: 'https://placehold.co/400x400?text=Website',
-    url: '/produkty/seo',
-    attributes: 'Audyt SEO + optymalizacja techniczna',
-  },
-]
+const { cart, pending, error } = await useCart()
 
 const steps = computed(() => [
   {
@@ -81,10 +62,17 @@ const steps = computed(() => [
         </p>
       </header>
 
-      <div class="flex flex-col gap-6 py-6 lg:flex-row lg:items-start">
-        <CartList :items="cartItems" />
-        <CartSummary :next="next" />
-      </div>
+      <template v-if="cart?.items?.length">
+        <div class="flex flex-col gap-6 py-6 lg:flex-row lg:items-start">
+          <CartList :items="cart.items" />
+          <CartSummary
+            :cart="cart"
+            :next="next"
+          />
+        </div>
+      </template>
+
+      <CartEmpty v-else />
     </template>
 
     <template #data>

@@ -5,13 +5,13 @@ interface Props {
   max?: number
   step?: number
   disabled?: boolean
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'base' | 'lg'
 }
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: 0,
   step: 1,
-  size: 'md',
+  size: 'base',
 })
 
 const emit = defineEmits<{
@@ -46,7 +46,7 @@ function increment() {
     class="flex items-center rounded-md border border-muted px-2"
     :class="{
       'h-8': size === 'sm',
-      'h-10': size === 'md',
+      'h-10': size === 'base',
       'h-12': size === 'lg',
     }"
   >
@@ -55,7 +55,7 @@ function increment() {
       class="flex cursor-pointer items-center justify-center text-primary disabled:cursor-not-allowed disabled:opacity-50"
       :class="{
         'size-7': size === 'sm',
-        'size-8': size === 'md',
+        'size-8': size === 'base',
         'size-10': size === 'lg',
       }"
       :disabled="disabled || (min !== undefined && modelValue <= min)"
@@ -66,7 +66,7 @@ function increment() {
         name="minus" 
         :class="{
           'size-4': size === 'sm',
-          'size-5': size === 'md',
+          'size-5': size === 'base',
           'size-6': size === 'lg',
         }" 
       />
@@ -76,7 +76,7 @@ function increment() {
       class="flex-1 text-center tabular-nums"
       :class="{
         'min-w-7 text-xs': size === 'sm',
-        'min-w-8 text-sm': size === 'md',
+        'min-w-8 text-sm': size === 'base',
         'min-w-10 text-base': size === 'lg',
       }"
       aria-live="polite"
@@ -89,7 +89,7 @@ function increment() {
       class="flex cursor-pointer items-center justify-center text-primary disabled:cursor-not-allowed disabled:opacity-50"
       :class="{
         'size-7': size === 'sm',
-        'size-8': size === 'md',
+        'size-8': size === 'base',
         'size-10': size === 'lg',
       }"
       :disabled="disabled || (max !== undefined && modelValue >= max)"
@@ -100,7 +100,7 @@ function increment() {
         name="plus" 
         :class="{
           'size-4': size === 'sm',
-          'size-5': size === 'md',
+          'size-5': size === 'base',
           'size-6': size === 'lg',
         }" 
       />

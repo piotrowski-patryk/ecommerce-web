@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { CartProduct } from '~/types/cart'
+import type { CartItem } from '~/types/cart'
 
 defineProps<{
-  items: CartProduct[]
+  items: CartItem[]
 }>()
 
 const { t } = useI18n()
@@ -29,7 +29,7 @@ const { t } = useI18n()
         v-for="item in items"
         :key="item.id"
       >
-        <CartListItem :product="item" />
+        <CartItem :item="item" />
       </li>
     </ul>
   </section>

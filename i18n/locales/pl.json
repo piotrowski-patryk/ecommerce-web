@@ -7,6 +7,25 @@
     "increase": "Zwiększ wartość"
   },
 
+  "errors": {
+    "default": "Wystąpił nieoczekiwany błąd",
+    "400": "Nieprawidłowe żądanie",
+    "401": "Wymagane logowanie",
+    "403": "Brak dostępu",
+    "404": "Nie znaleziono zasobu",
+    "405": "Metoda niedozwolona",
+    "408": "Przekroczono czas żądania",
+    "409": "Konflikt danych",
+    "410": "Zasób niedostępny",
+    "422": "Nieprawidłowe dane",
+    "423": "Zasób zablokowany",
+    "429": "Zbyt wiele żądań. Spróbuj za chwilę",
+    "500": "Błąd serwera. Spróbuj ponownie",
+    "502": "Serwer niedostępny",
+    "503": "Usługa tymczasowo niedostępna",
+    "504": "Przekroczono czas odpowiedzi serwera"
+  },
+
   "header": {
     "menu": {
       "open": "Otwórz menu"

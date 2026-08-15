@@ -4,7 +4,7 @@ interface Props {
   loading?: boolean
   type?: 'button' | 'submit' | 'reset'
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'base' | 'lg'
 }
 
 withDefaults(defineProps<Props>(), {
@@ -12,7 +12,7 @@ withDefaults(defineProps<Props>(), {
   disabled: false,
   loading: false,
   variant: 'outline',
-  size: 'md',
+  size: 'base',
 })
 
 const emit = defineEmits<{
@@ -36,16 +36,16 @@ const emit = defineEmits<{
       },
       // Sizes
       {
-        'h-8 px-3 text-xs': size === 'sm',
-        'h-10 px-4 text-sm': size === 'md',
-        'h-12 px-6 text-base': size === 'lg',
+        'h-10 px-4 text-sm font-normal': size === 'sm',
+        'h-12 px-5 text-base font-medium': size === 'base',
+        'h-14 px-6 text-lg font-semibold': size === 'lg',
       },
     ]"
     @click="emit('click', $event)"
   >
     <Spinner 
       v-if="loading" 
-      :size="size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md'" 
+      :size="size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'base'" 
     />
     <slot />
   </button>

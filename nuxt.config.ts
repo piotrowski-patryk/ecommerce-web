@@ -32,6 +32,12 @@ export default defineNuxtConfig({
     strict: true,
   },
 
+  runtimeConfig: {
+    public: {
+      apiUrl: '',
+    },
+  },
+
   colorMode: {
     classSuffix: '',
     preference: 'system',
@@ -39,23 +45,27 @@ export default defineNuxtConfig({
     storageKey: 'theme',
   },
 
-  runtimeConfig: {
-    public: {
-      apiUrl: '',
-    },
-  },
-
-  devtools: {
-    enabled: false,
-  },
-
   i18n: {
     defaultLocale: 'pl',
     strategy: 'prefix_except_default',
 
     locales: [
-      { code: 'pl', language: 'pl-PL', name: 'Polski', file: 'pl.json' },
-      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      {
+        code: 'pl',
+        language: 'pl-PL',
+        name: 'Polski',
+        file: 'pl.json',
+      },
+      {
+        code: 'en',
+        language: 'en-US',
+        name: 'English',
+        file: 'en.json',
+      },
     ],
+  },
+
+  devtools: {
+    enabled: false,
   },
 })

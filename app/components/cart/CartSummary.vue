@@ -17,12 +17,12 @@ defineProps<{
       <dl class="space-y-3 text-sm">
         <div class="flex items-center justify-between gap-4">
           <dt class="text-muted-foreground">{{ t('cart.summary.subtotal') }}</dt>
-          <dd class="font-medium">2 500 zł</dd>
+          <dd class="font-semibold">2 500 zł</dd>
         </div>
 
         <div class="flex items-center justify-between gap-4">
           <dt class="text-muted-foreground">{{ t('cart.summary.shipping') }}</dt>
-          <dd class="font-medium">0 zł</dd>
+          <dd class="font-semibold">0 zł</dd>
         </div>
 
         <div class="flex items-center justify-between gap-4 border-t border-border pt-3 text-base font-semibold">

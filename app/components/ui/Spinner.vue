@@ -1,10 +1,10 @@
 <script setup lang="ts">
 interface Props {
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'base' | 'lg'
 }
 
 withDefaults(defineProps<Props>(), {
-  size: 'md',
+  size: 'base',
 })
 
 const { t } = useI18n()
@@ -21,7 +21,7 @@ const { t } = useI18n()
       class="animate-spin"
       :class="{
         'size-4': size === 'sm',
-        'size-6': size === 'md',
+        'size-6': size === 'base',
         'size-8': size === 'lg',
       }"
     />

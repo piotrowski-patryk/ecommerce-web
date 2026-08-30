@@ -11,7 +11,7 @@ const menu = computed(() => [[
 </script>
 
 <template>
-  <header class="sticky top-0 z-40 border-b border-default bg-default/80 backdrop-blur-xl">
+  <header class="sticky top-0 z-50 border-b border-default bg-default/75 backdrop-blur">
     <div class="container flex h-16 items-center justify-between gap-4">
       <Dropdown :items="menu">
         <Button

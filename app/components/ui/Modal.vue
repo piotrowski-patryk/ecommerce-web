@@ -26,7 +26,7 @@ defineExpose({ open, close })
       aria-modal="true"
       @click.self="close"
     >
-      <div class="flex max-h-dvh w-full flex-col bg-default sm:max-h-[calc(100dvh-2rem)] sm:max-w-[30rem] sm:rounded-lg sm:border sm:border-default sm:shadow-xl">
+      <div class="flex max-h-dvh w-full flex-col bg-default sm:max-h-[calc(100dvh-2rem)] sm:max-w-120 sm:rounded-lg sm:border sm:border-default sm:shadow-xl">
         <header class="flex items-center justify-between gap-5 border-b border-default p-5">
           <h2 class="min-w-0 font-display text-xl font-semibold text-strong">
             {{ title }}

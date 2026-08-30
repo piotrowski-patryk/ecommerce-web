@@ -35,7 +35,7 @@ const menu = computed(() => [[
         <span
           v-if="cart.itemCount > 0"
           aria-hidden="true"
-          class="absolute -top-1 left-5 min-w-4 rounded-full bg-primary px-1 text-center text-xs leading-4 font-medium tabular-nums text-inverted"
+          class="absolute -top-1 left-7 inline-flex h-4 min-w-4 items-center justify-center rounded-sm bg-primary px-1 text-xs leading-none font-medium tabular-nums text-inverted"
         >
           {{ cart.itemCount }}
         </span>

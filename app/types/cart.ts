@@ -1,31 +1,29 @@
+import type {
+  Product,
+  ProductMedia,
+  ProductVariant,
+} from '~/types/product'
+
+type CartProductVariant = Omit<ProductVariant, 'media'> & {
+  media: ProductMedia | null
+}
+
 export interface Cart {
   id: string | null
+  status: string
+  expiresAt: string
   items: CartItem[]
-  subtotal: number
-  shipping: number
-  discount: number
-  total: number
-  currency: string
 }
 
 export interface CartItem {
   id: string
-  product: {
-    id: string
-    name: string
-    slug: string
-    image: string
-  }
   quantity: number
-  unitPrice: number
-  subtotal: number
+  product: Omit<Product, 'variants'> & {
+    variant: CartProductVariant
+  }
 }
 
 export interface AddToCartPayload {
   variantId: string
-  quantity: number
-}
-
-export interface UpdateCartItemPayload {
   quantity: number
 }

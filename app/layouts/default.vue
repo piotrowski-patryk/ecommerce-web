@@ -1,23 +1,9 @@
 <template>
-  <div class="default-layout">
-    <Header />
+  <Header />
 
-    <main class="main-content">
-      <slot />
-    </main>
+  <main class="flex flex-1 flex-col">
+    <slot />
+  </main>
 
-    <Footer />
-  </div>
+  <Footer />
 </template>
-
-<style scoped>
-.default-layout {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-
-.main-content {
-  flex: 1;
-}
-</style>

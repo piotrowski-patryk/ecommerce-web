@@ -1,69 +1,83 @@
 <script setup lang="ts">
 import type { CartItem } from '~/types/cart'
 
-defineProps<{
+const { item } = defineProps<{
   item: CartItem
 }>()
 
-const { t } = useI18n()
-const localePath = useLocalePath()
+const cart = useCart()
+
+const options = computed(() =>
+  Array.from(
+    { length: Math.max(item.quantity, item.product.variant.stock) },
+    (_, index) => ({
+      label: String(index + 1),
+      value: index + 1,
+    }),
+  ),
+)
 </script>
 
 <template>
-  <div
-    class="group grid grid-cols-[auto_1fr_auto] grid-rows-[auto_auto] items-center gap-x-4 gap-y-2 rounded-md border border-border bg-surface p-4 md:grid-cols-[auto_1fr_auto_auto_auto] md:grid-rows-1 md:gap-y-0"
+  <tr
+    class="grid grid-cols-[5rem_minmax(0,1fr)_auto] grid-rows-[auto_auto] content-between gap-x-4 py-5 sm:table-row"
   >
-    <!-- Product image -->
-    <NuxtLink
-      :to="localePath(`/produkty/${item.product.slug}`)"
-      class="row-span-2 block size-20 shrink-0 overflow-hidden md:row-span-1 md:size-24"
-    >
-      <img
-        :src="item.product.image"
-        :alt="item.product.name"
-        class="size-full object-contain"
-      >
-    </NuxtLink>
-
-    <!-- Product information -->
-    <div class="flex flex-col justify-center">
-      <h3 class="font-medium">
-        <NuxtLink
-          :to="localePath(`/produkty/${item.product.slug}`)"
-          class="hover:underline"
+    <td class="contents sm:table-cell sm:py-5 sm:align-middle">
+      <div class="contents sm:flex sm:items-center sm:gap-3">
+        <img
+          v-if="item.product.variant.media"
+          :src="item.product.variant.media.url"
+          :alt="item.product.variant.media.alt"
+          class="row-span-2 size-20 self-center rounded-sm"
         >
-          {{ item.product.name }}
-        </NuxtLink>
-      </h3>
-    </div>
 
-    <!-- Quantity -->
-    <div
-      class="col-start-3 row-start-2 justify-self-end text-sm text-muted-foreground md:col-start-3 md:row-start-auto md:justify-self-start"
-    >
-      <InputNumber
+        <div class="col-start-2 row-start-1 min-w-0 self-start sm:self-center">
+          <NuxtLinkLocale
+            :to="{
+              name: 'product-slug',
+              params: { slug: item.product.variant.slug },
+            }"
+            class="line-clamp-2 text-base font-semibold text-strong hover:underline"
+          >
+            {{ item.product.name }}
+          </NuxtLinkLocale>
+
+          <span class="mt-1 block text-sm text-muted">
+            {{ item.product.variant.name }}
+          </span>
+        </div>
+      </div>
+    </td>
+
+    <td class="col-start-3 row-start-2 w-20 justify-self-end self-end sm:table-cell sm:py-5 sm:text-right sm:align-middle">
+      <Select
         :model-value="item.quantity"
-        :min="1"
+        :items="options"
+        size="md"
+        placeholder=""
+        :disabled="cart.mutationPending"
+        :aria-label="$t('cart.table.quantity')"
+        @update:model-value="cart.update(item.id, $event)"
       />
-    </div>
+    </td>
 
-    <!-- Price -->
-    <div
-      class="col-start-2 row-start-2 font-semibold md:col-start-4 md:row-start-auto md:px-4"
-    >
-      {{ item.subtotal }} zł
-    </div>
+    <td class="col-start-2 row-start-2 self-end text-base font-semibold tabular-nums text-strong sm:table-cell sm:py-5 sm:text-right sm:align-middle">
+      {{ $n(Number(item.product.variant.price.amount), {
+        style: 'currency',
+        currency: item.product.variant.price.currency,
+      }) }}
+    </td>
 
-    <!-- Remove -->
-    <button
-      type="button"
-      class="col-start-3 row-start-1 self-start justify-self-end text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100 md:col-start-5 md:self-center"
-      :aria-label="t('common.remove', { name: item.product.name })"
-    >
-      <Icon
-        name="close"
-        class="size-5"
+    <td class="col-start-3 row-start-1 self-start text-right sm:table-cell sm:py-5 sm:align-middle">
+      <Button
+        icon="cross"
+        color="error"
+        variant="ghost"
+        size="md"
+        :disabled="cart.mutationPending"
+        :aria-label="$t('cart.table.remove', { product: item.product.name })"
+        @click="cart.remove(item.id)"
       />
-    </button>
-  </div>
+    </td>
+  </tr>
 </template>

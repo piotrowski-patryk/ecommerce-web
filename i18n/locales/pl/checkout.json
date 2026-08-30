@@ -1,0 +1,31 @@
+{
+  "checkout": {
+    "meta": {
+      "title": "Zamówienie",
+      "description": "Uzupełnij dane, wybierz sposób dostawy i płatności, a następnie złóż zamówienie."
+    },
+    "header": {
+      "title": "Zamówienie",
+      "description": "Uzupełnij dane, wybierz sposób dostawy i płatności, a następnie złóż zamówienie."
+    },
+    "success": {
+      "meta": {
+        "title": "Zamówienie złożone",
+        "description": "Twoje zamówienie zostało pomyślnie złożone."
+      },
+      "title": "Zamówienie zostało złożone",
+      "description": "Dziękujemy za zamówienie. Potwierdzenie i szczegóły zamówienia otrzymasz na podany adres e-mail.",
+      "redirect": "Wróć do sklepu"
+    },
+    "failure": {
+      "meta": {
+        "title": "Płatność nieudana",
+        "description": "Nie udało się zrealizować płatności za zamówienie."
+      },
+      "title": "Płatność nie została zrealizowana",
+      "description": "Nie udało się zrealizować płatności. Spróbuj ponownie lub wybierz inną metodę płatności.",
+      "retry": "Spróbuj ponownie",
+      "redirect": "Wróć do sklepu"
+    }
+  }
+}

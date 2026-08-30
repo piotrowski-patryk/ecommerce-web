@@ -1,13 +1,11 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 const currentYear = new Date().getFullYear()
 </script>
 
 <template>
   <footer class="py-6">
     <div class="container">
-      <p class="text-sm">
+      <p class="text-sm text-muted">
         © {{ currentYear }}
 
         <a
@@ -20,7 +18,7 @@ const currentYear = new Date().getFullYear()
           Patryk Piotrowski
         </a>.
 
-        {{ t('footer.copyright') }}
+        {{ $t('common.footer.copyright') }}
       </p>
     </div>
   </footer>

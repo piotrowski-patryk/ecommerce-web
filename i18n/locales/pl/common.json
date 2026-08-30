@@ -1,0 +1,50 @@
+{
+  "common": {
+    "action": {
+      "loading": "Ładowanie...",
+      "remove": "Usuń",
+      "next": "Dalej",
+      "decrease": "Zmniejsz wartość",
+      "increase": "Zwiększ wartość"
+    },
+
+    "header": {
+      "menu": {
+        "open": "Otwórz menu",
+        "products": "Produkty"
+      },
+      "cart": {
+        "label": "Koszyk"
+      }
+    },
+
+    "footer": {
+      "copyright": "Wszelkie prawa zastrzeżone."
+    }
+  },
+
+  "products": {
+    "meta": {
+      "title": "Produkty",
+      "description": "Przeglądaj produkty dostępne w sklepie."
+    },
+    "header": {
+      "title": "Produkty",
+      "description": "Przeglądaj produkty dostępne w sklepie."
+    },
+    "list": {
+      "view": "Zobacz produkt"
+    },
+    "empty": {
+      "title": "Brak produktów",
+      "description": "Obecnie nie ma produktów do wyświetlenia."
+    },
+    "detail": {
+      "meta": {
+        "title": "Produkt",
+        "description": "Poznaj szczegóły produktu i dodaj go do koszyka."
+      },
+      "addToCart": "Dodaj do koszyka"
+    }
+  }
+}

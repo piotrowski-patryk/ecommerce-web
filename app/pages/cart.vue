@@ -1,88 +1,84 @@
 <script setup lang="ts">
-defineI18nRoute({
-  paths: {
-    pl: '/koszyk',
-    en: '/cart',
+definePageMeta({
+  i18n: {
+    paths: {
+      pl: '/koszyk',
+      en: '/cart',
+    },
   },
 })
 
 const { t } = useI18n()
+const cart = useCart()
 
 useSeoMeta({
-  title: () => t('cart.seo.title'),
-  description: () => t('cart.seo.description'),
-  ogTitle: () => t('cart.seo.title'),
-  ogDescription: () => t('cart.seo.description'),
+  title: () => t('cart.meta.title'),
+  description: () => t('cart.meta.description'),
 })
-
-const { cart, pending, error } = await useCart()
-
-const steps = computed(() => [
-  {
-    slot: 'cart' as const,
-    title: t('cart.steps.cart.title'),
-    description: t('cart.steps.cart.description'),
-    icon: 'cart',
-  },
-  {
-    slot: 'data' as const,
-    title: t('cart.steps.data.title'),
-    description: t('cart.steps.data.description'),
-    icon: 'file-text',
-  },
-  {
-    slot: 'payment' as const,
-    title: t('cart.steps.payment.title'),
-    description: t('cart.steps.payment.description'),
-    icon: 'dollar-sign',
-  },
-  {
-    slot: 'delivery' as const,
-    title: t('cart.steps.delivery.title'),
-    description: t('cart.steps.delivery.description'),
-    icon: 'check',
-  },
-])
 </script>
 
 <template>
-  <Stepper
-    :items="steps"
-    :clickable-completed="true"
-    class="container py-6"
-  >
-    <template #cart="{ next }">
-      <header class="max-w-2xl py-4">
-        <h1 class="text-4xl font-semibold">
-          {{ t('cart.header.title') }}
-        </h1>
+  <!-- Loading state -->
+  <Spinner
+    v-if="cart.status === 'pending' && !cart.cart"
+    size="xl"
+    class="m-auto"
+  />
 
-        <p class="mt-2 text-sm leading-5 text-muted-foreground">
-          {{ t('cart.header.description') }}
-        </p>
-      </header>
+  <!-- Populated cart -->
+  <template v-else-if="cart.cart?.items.length">
+    <Heading
+      :title="$t('cart.header.title')"
+      :description="$t('cart.header.description')"
+    />
 
-      <template v-if="cart?.items?.length">
-        <div class="flex flex-col gap-6 py-6 lg:flex-row lg:items-start">
-          <CartList :items="cart.items" />
-          <CartSummary
-            :cart="cart"
-            :next="next"
-          />
-        </div>
-      </template>
+    <div
+      class="container grid gap-8 pb-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start"
+    >
+      <section
+        aria-labelledby="cart-products-title"
+        class="min-w-0 sm:grid"
+      >
+        <h2
+          id="cart-products-title"
+          class="flex h-14 w-fit items-center gap-2 font-display text-lg font-semibold text-strong sm:z-10 sm:col-start-1 sm:row-start-1"
+        >
+          {{ $t('cart.table.products') }}
+          <span class="text-muted">( {{ cart.cart.items.length }} )</span>
+        </h2>
 
-      <CartEmpty v-else />
-    </template>
+        <CartTable
+          :items="cart.cart.items"
+          aria-labelledby="cart-products-title"
+          class="sm:col-start-1 sm:row-start-1"
+        />
+      </section>
 
-    <template #data>
-      <Modal title="Tytuł jakiś">
-        <Button>Otwórz pełny ekran</Button>
+      <section aria-labelledby="cart-summary-title">
+        <h2
+          id="cart-summary-title"
+          class="flex h-14 items-center border-b border-default font-display text-lg font-semibold text-strong"
+        >
+          {{ $t('cart.summary.title') }}
+        </h2>
 
-        <template #body>
-          <p>Zawartość wyświetlana na pełnym ekranie...</p>
-        </template>
-      </Modal>
-    </template>
-  </Stepper>
+        <CartSummary />
+      </section>
+    </div>
+  </template>
+
+  <!-- Empty cart -->
+  <State
+    v-else
+    icon="cart"
+    class="my-auto"
+    :title="$t('cart.empty.title')"
+    :description="$t('cart.empty.description')"
+    :actions="[
+      {
+        label: $t('cart.empty.action'),
+        to: 'products',
+      },
+    ]"
+  />
 </template>

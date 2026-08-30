@@ -1,0 +1,31 @@
+@theme inline {
+  /* GitHub Primer font stack */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Colors */
+  --color-primary: light-dark(var(--color-blue-500), var(--color-blue-400));
+  --color-secondary: light-dark(var(--color-indigo-500), var(--color-indigo-400));
+  --color-success: light-dark(var(--color-emerald-500), var(--color-emerald-400));
+  --color-info: light-dark(var(--color-blue-500), var(--color-blue-400));
+  --color-warning: light-dark(var(--color-amber-500), var(--color-amber-400));
+  --color-error: light-dark(var(--color-red-500), var(--color-red-400));
+
+  /* Text */
+  --text-color-muted: light-dark(var(--color-gray-500), var(--color-gray-400));
+  --text-color-default: light-dark(var(--color-gray-700), var(--color-gray-200));
+  --text-color-strong: light-dark(var(--color-gray-950), var(--color-gray-50));
+  --text-color-inverted: light-dark(var(--color-gray-50), var(--color-gray-950));
+
+  /* Background */
+  --background-color-muted: light-dark(var(--color-gray-50), var(--color-gray-900));
+  --background-color-default: light-dark(var(--color-white), var(--color-gray-950));
+  --background-color-strong: light-dark(var(--color-gray-200), var(--color-gray-800));
+  --background-color-inverted: light-dark(var(--color-gray-950), var(--color-gray-100));
+
+  /* Border */
+  --border-color-muted: light-dark(var(--color-gray-200), var(--color-gray-800));
+  --border-color-default: light-dark(var(--color-gray-300), var(--color-gray-700));
+  --border-color-strong: light-dark(var(--color-gray-400), var(--color-gray-500));
+  --border-color-inverted: light-dark(var(--color-gray-900), var(--color-gray-100));
+}

@@ -3,20 +3,16 @@ interface Skeleton {
   as?: string
 }
 
-const props = withDefaults(defineProps<Skeleton>(), {
-  as: 'div',
-})
-
-const { t } = useI18n()
+const { as = 'div' } = defineProps<Skeleton>()
 </script>
 
 <template>
   <component
-    :is="props.as"
-    class="animate-pulse rounded-md bg-elevated"
+    :is="as"
+    class="animate-pulse rounded-md bg-muted"
     role="status"
     aria-busy="true"
-    :aria-label="t('common.loading')"
+    :aria-label="$t('common.action.loading')"
   >
     <slot />
   </component>

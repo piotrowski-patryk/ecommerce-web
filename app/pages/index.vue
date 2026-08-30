@@ -1,11 +1,7 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
 
-await navigateTo(
-  localePath({
-    name: 'cart',
-  })
-)
+await navigateTo(localePath('products'), { redirectCode: 302 })
 </script>
 
-<template></template>
+<template />

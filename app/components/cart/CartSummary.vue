@@ -1,44 +1,58 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
-defineProps<{
-  next?: () => void
-}>()
+const cart = useCart()
 </script>
 
 <template>
-  <aside class="w-full lg:sticky lg:top-6 lg:w-96">
+  <div v-if="cart.cart" class="pt-5">
+    <dl class="space-y-4 text-base">
+      <div class="flex items-center justify-between gap-4">
+        <dt class="text-muted">
+          {{ $t('cart.summary.subtotal') }}
+        </dt>
 
-    <h2 class="mb-4 text-lg font-semibold">
-      {{ t('cart.summary.title') }}
-    </h2>
+        <dd class="font-medium tabular-nums">
+          {{ $n(cart.subtotal, {
+            style: 'currency',
+            currency: cart.currency,
+          }) }}
+        </dd>
+      </div>
 
-    <div class="bg-surface border border-border rounded-md p-6">
-      <dl class="space-y-3 text-sm">
-        <div class="flex items-center justify-between gap-4">
-          <dt class="text-muted-foreground">{{ t('cart.summary.subtotal') }}</dt>
-          <dd class="font-semibold">2 500 zł</dd>
-        </div>
+      <div class="flex items-center justify-between gap-4">
+        <dt class="text-muted">
+          {{ $t('cart.summary.shipping') }}
+        </dt>
 
-        <div class="flex items-center justify-between gap-4">
-          <dt class="text-muted-foreground">{{ t('cart.summary.shipping') }}</dt>
-          <dd class="font-semibold">0 zł</dd>
-        </div>
+        <dd class="font-medium tabular-nums">
+          {{ $n(cart.shipping, {
+            style: 'currency',
+            currency: cart.currency,
+          }) }}
+        </dd>
+      </div>
 
-        <div class="flex items-center justify-between gap-4 border-t border-border pt-3 text-base font-semibold">
-          <dt>{{ t('cart.summary.total') }}</dt>
-          <dd>2 500 zł</dd>
-        </div>
-      </dl>
+      <div class="flex items-center justify-between gap-4 border-t border-default pt-5 font-semibold text-strong">
+        <dt class="text-xl font-semibold">
+          {{ $t('cart.summary.total') }}
+        </dt>
 
-      <Button
-        @click="next"
-        variant="primary"
-        class="w-full mt-6"
-      >
-        {{ t('common.next') }}: {{ t('cart.steps.data.title') }}
-      </Button>
+        <dd class="text-xl font-semibold tabular-nums">
+          {{ $n(cart.total, {
+            style: 'currency',
+            currency: cart.currency,
+          }) }}
+        </dd>
+      </div>
+    </dl>
 
-    </div>
-  </aside>
+    <Button
+      :to="cart.mutationPending ? undefined : { name: 'checkout' }"
+      :disabled="cart.mutationPending"
+      :loading="cart.mutationPending"
+      size="xl"
+      class="mt-5 w-full"
+    >
+      {{ $t('cart.summary.checkout') }}
+    </Button>
+  </div>
 </template>

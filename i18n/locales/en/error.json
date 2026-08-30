@@ -1,0 +1,70 @@
+{
+  "error": {
+    "redirect": "Back to shop",
+
+    "400": {
+      "title": "Bad request",
+      "description": "The request is invalid or contains incorrect data."
+    },
+
+    "401": {
+      "title": "Unauthorized",
+      "description": "You must be signed in to access this page."
+    },
+
+    "403": {
+      "title": "Access denied",
+      "description": "You don't have permission to view this page."
+    },
+
+    "404": {
+      "title": "Page not found",
+      "description": "The page you're looking for doesn't exist or has been moved."
+    },
+
+    "405": {
+      "title": "Method not allowed",
+      "description": "This request method is not supported for this resource."
+    },
+
+    "408": {
+      "title": "Request timeout",
+      "description": "The server did not receive the request in time. Please try again."
+    },
+
+    "409": {
+      "title": "Conflict",
+      "description": "The operation cannot be completed because of a data conflict."
+    },
+
+    "422": {
+      "title": "Invalid data",
+      "description": "The submitted data could not be processed."
+    },
+
+    "429": {
+      "title": "Too many requests",
+      "description": "Too many requests were made. Please try again in a moment."
+    },
+
+    "500": {
+      "title": "Server error",
+      "description": "Something went wrong on the server. Please try again later."
+    },
+
+    "502": {
+      "title": "Bad gateway",
+      "description": "The server received an invalid response. Please try again later."
+    },
+
+    "503": {
+      "title": "Service unavailable",
+      "description": "The service is temporarily unavailable. Please try again later."
+    },
+
+    "504": {
+      "title": "Gateway timeout",
+      "description": "The server did not receive a response in time. Please try again later."
+    }
+  }
+}

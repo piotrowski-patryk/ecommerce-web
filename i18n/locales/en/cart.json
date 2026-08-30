@@ -1,0 +1,44 @@
+{
+  "cart": {
+    "meta": {
+      "title": "Cart",
+      "description": "Review the products in your cart, adjust quantities or remove selected items, then proceed to checkout."
+    },
+
+    "header": {
+      "title": "Cart",
+      "description": "Review your selected products, check your cart contents, and proceed to the next step of the ordering process."
+    },
+
+    "table": {
+      "products": "Products in cart",
+      "quantity": "Quantity",
+      "price": "Price",
+      "perUnit": "/ item",
+      "remove": "Remove {product} from cart"
+    },
+
+    "list": {
+      "title": "Products in cart",
+      "product": "Product",
+      "quantity": "Quantity",
+      "price": "Price",
+      "actions": "Actions",
+      "remove": "Remove {product} from cart"
+    },
+
+    "summary": {
+      "title": "Order summary",
+      "subtotal": "Products subtotal",
+      "shipping": "Shipping",
+      "total": "Total to pay",
+      "checkout": "Proceed to checkout"
+    },
+
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Add products to your cart to place an order.",
+      "action": "Go to store"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "checkout": {
+    "meta": {
+      "title": "Order",
+      "description": "Enter your details, choose your delivery and payment methods, then place your order."
+    },
+
+    "header": {
+      "title": "Order",
+      "description": "Enter your details, choose your delivery and payment methods, then place your order."
+    },
+
+    "success": {
+      "meta": {
+        "title": "Order placed",
+        "description": "Your order has been placed successfully."
+      },
+      "title": "Your order has been placed",
+      "description": "Thank you for your order. Confirmation and order details will be sent to the email address you provided.",
+      "redirect": "Back to store"
+    },
+
+    "failure": {
+      "meta": {
+        "title": "Payment failed",
+        "description": "Your payment could not be completed."
+      },
+      "title": "Payment could not be completed",
+      "description": "We couldn't process your payment. Please try again or choose a different payment method.",
+      "retry": "Try again",
+      "redirect": "Back to store"
+    }
+  }
+}

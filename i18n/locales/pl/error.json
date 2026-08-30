@@ -1,0 +1,70 @@
+{
+  "error": {
+    "redirect": "Wróć do sklepu",
+
+    "400": {
+      "title": "Nieprawidłowe żądanie",
+      "description": "Żądanie jest nieprawidłowe lub zawiera niepoprawne dane."
+    },
+
+    "401": {
+      "title": "Brak autoryzacji",
+      "description": "Musisz się zalogować, aby uzyskać dostęp do tej strony."
+    },
+
+    "403": {
+      "title": "Brak dostępu",
+      "description": "Nie masz uprawnień do wyświetlenia tej strony."
+    },
+
+    "404": {
+      "title": "Nie znaleziono strony",
+      "description": "Strona, której szukasz, nie istnieje lub została przeniesiona."
+    },
+
+    "405": {
+      "title": "Niedozwolona metoda",
+      "description": "Ta metoda żądania nie jest obsługiwana dla tego zasobu."
+    },
+
+    "408": {
+      "title": "Przekroczono czas żądania",
+      "description": "Serwer nie otrzymał żądania w wymaganym czasie. Spróbuj ponownie."
+    },
+
+    "409": {
+      "title": "Wystąpił konflikt",
+      "description": "Nie można wykonać operacji z powodu konfliktu danych."
+    },
+
+    "422": {
+      "title": "Nieprawidłowe dane",
+      "description": "Nie można przetworzyć przesłanych danych."
+    },
+
+    "429": {
+      "title": "Zbyt wiele żądań",
+      "description": "Wykonano zbyt wiele żądań. Spróbuj ponownie za chwilę."
+    },
+
+    "500": {
+      "title": "Wystąpił błąd serwera",
+      "description": "Coś poszło nie tak po stronie serwera. Spróbuj ponownie później."
+    },
+
+    "502": {
+      "title": "Błąd bramy",
+      "description": "Serwer otrzymał nieprawidłową odpowiedź. Spróbuj ponownie później."
+    },
+
+    "503": {
+      "title": "Usługa niedostępna",
+      "description": "Usługa jest tymczasowo niedostępna. Spróbuj ponownie później."
+    },
+
+    "504": {
+      "title": "Przekroczono czas oczekiwania",
+      "description": "Serwer nie otrzymał odpowiedzi w wymaganym czasie. Spróbuj ponownie później."
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "common": {
+    "action": {
+      "loading": "Loading...",
+      "remove": "Remove",
+      "next": "Next",
+      "decrease": "Decrease value",
+      "increase": "Increase value"
+    },
+
+    "header": {
+      "menu": {
+        "open": "Open menu",
+        "products": "Products"
+      },
+      "cart": {
+        "label": "Cart"
+      }
+    },
+
+    "footer": {
+      "copyright": "All rights reserved."
+    }
+  },
+
+  "products": {
+    "meta": {
+      "title": "Products",
+      "description": "Browse products available in the shop."
+    },
+    "header": {
+      "title": "Products",
+      "description": "Browse products available in the shop."
+    },
+    "list": {
+      "view": "View product"
+    },
+    "empty": {
+      "title": "No products",
+      "description": "There are currently no products to display."
+    },
+    "detail": {
+      "meta": {
+        "title": "Product",
+        "description": "View product details and add it to your cart."
+      },
+      "addToCart": "Add to cart"
+    }
+  }
+}

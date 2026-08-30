@@ -1,0 +1,30 @@
+{
+  "cart": {
+    "meta": {
+      "title": "Koszyk",
+      "description": "Przejrzyj produkty w koszyku, zmień ilość lub usuń wybrane pozycje i przejdź do finalizacji zamówienia."
+    },
+    "header": {
+      "title": "Koszyk",
+      "description": "Sprawdź produkty, wybierz sposób dostawy i przejdź dalej, aby złożyć zamówienie."
+    },
+    "table": {
+      "products": "Produkty w koszyku",
+      "quantity": "Ilość",
+      "price": "Cena",
+      "remove": "Usuń {product} z koszyka"
+    },
+    "summary": {
+      "title": "Podsumowanie zamówienia",
+      "subtotal": "Wartość produktów",
+      "shipping": "Dostawa",
+      "total": "Do zapłaty",
+      "checkout": "Przejdź do zamówienia"
+    },
+    "empty": {
+      "title": "Koszyk jest pusty",
+      "description": "Dodaj produkty do koszyka, aby móc je zamówić.",
+      "action": "Przejdź do sklepu"
+    }
+  }
+}

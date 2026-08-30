@@ -1,29 +1,21 @@
 <script setup lang="ts">
 interface Props {
-  size?: 'sm' | 'base' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 
-withDefaults(defineProps<Props>(), {
-  size: 'base',
-})
-
-const { t } = useI18n()
+const { size = 'md' } = defineProps<Props>()
 </script>
 
 <template>
-  <div 
+  <div
     class="inline-flex items-center justify-center text-primary"
     role="status"
-    :aria-label="t('common.loading')"
+    :aria-label="$t('common.action.loading')"
   >
     <Icon
       name="loader"
+      :size="size"
       class="animate-spin"
-      :class="{
-        'size-4': size === 'sm',
-        'size-6': size === 'base',
-        'size-8': size === 'lg',
-      }"
     />
   </div>
 </template>

@@ -8,6 +8,62 @@
       "title": "Zamówienie",
       "description": "Uzupełnij dane, wybierz sposób dostawy i płatności, a następnie złóż zamówienie."
     },
+    "steps": {
+      "contact": "Krok 1 z 4",
+      "address": "Krok 2 z 4",
+      "delivery": "Krok 3 z 4",
+      "payment": "Krok 4 z 4"
+    },
+    "form": {
+      "contact": {
+        "title": "Dane kontaktowe",
+        "description": "Na ten adres wyślemy potwierdzenie i informacje o zamówieniu."
+      },
+      "address": {
+        "title": "Adres dostawy"
+      },
+      "email": "Adres e-mail",
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "phone": "Numer telefonu",
+      "street": "Ulica i numer domu lub mieszkania",
+      "postalCode": "Kod pocztowy",
+      "city": "Miejscowość",
+      "country": "Kraj",
+      "countries": {
+        "pl": "Polska",
+        "de": "Niemcy",
+        "cz": "Czechy",
+        "sk": "Słowacja"
+      },
+      "free": "Bezpłatnie",
+      "delivery": {
+        "title": "Sposób dostawy",
+        "courier": {
+          "title": "Kurier",
+          "description": "Dostawa pod wskazany adres w 1–2 dni robocze."
+        },
+        "pickup": {
+          "title": "Punkt odbioru",
+          "description": "Odbierz przesyłkę w dogodnym punkcie w ciągu 1–2 dni."
+        }
+      },
+      "payment": {
+        "title": "Metoda płatności",
+        "online": {
+          "title": "Płatność online",
+          "description": "BLIK, szybki przelew lub karta płatnicza."
+        },
+        "transfer": {
+          "title": "Przelew tradycyjny",
+          "description": "Dane do przelewu otrzymasz po złożeniu zamówienia."
+        }
+      },
+      "notes": "Uwagi do zamówienia (opcjonalnie)",
+      "notesPlaceholder": "Np. dodatkowe informacje dla kuriera",
+      "submit": "Zamawiam i płacę",
+      "terms": "Składając zamówienie, potwierdzasz obowiązek zapłaty."
+    },
     "success": {
       "meta": {
         "title": "Zamówienie złożone",

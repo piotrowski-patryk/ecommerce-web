@@ -1,5 +1,8 @@
 <script setup lang="ts">
 interface Props {
+  // BUTTON
+  type?: 'button' | 'submit' | 'reset'
+
   // LINK
   to?: string | Record<string, unknown>
 
@@ -19,6 +22,7 @@ interface Props {
 }
 
 const {
+  type = 'button',
   to,
   disabled,
   loading,
@@ -41,7 +45,7 @@ const emit = defineEmits<{
   <component
     :is="to ? NuxtLinkLocale : 'button'"
     :to="to"
-    :type="to ? undefined : 'button'"
+    :type="to ? undefined : type"
     :disabled="to ? undefined : disabled || loading"
 
     class="

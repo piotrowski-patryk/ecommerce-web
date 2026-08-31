@@ -10,6 +10,64 @@
       "description": "Enter your details, choose your delivery and payment methods, then place your order."
     },
 
+    "steps": {
+      "contact": "Step 1 of 4",
+      "address": "Step 2 of 4",
+      "delivery": "Step 3 of 4",
+      "payment": "Step 4 of 4"
+    },
+
+    "form": {
+      "contact": {
+        "title": "Contact details",
+        "description": "We will send your confirmation and order updates to this address."
+      },
+      "address": {
+        "title": "Delivery address"
+      },
+      "email": "Email address",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone number",
+      "street": "Street and house or apartment number",
+      "postalCode": "Postal code",
+      "city": "City",
+      "country": "Country",
+      "countries": {
+        "pl": "Poland",
+        "de": "Germany",
+        "cz": "Czechia",
+        "sk": "Slovakia"
+      },
+      "free": "Free",
+      "delivery": {
+        "title": "Delivery method",
+        "courier": {
+          "title": "Courier",
+          "description": "Delivery to your address in 1–2 business days."
+        },
+        "pickup": {
+          "title": "Pickup point",
+          "description": "Collect your parcel from a convenient point in 1–2 days."
+        }
+      },
+      "payment": {
+        "title": "Payment method",
+        "online": {
+          "title": "Online payment",
+          "description": "Pay by instant transfer or payment card."
+        },
+        "transfer": {
+          "title": "Bank transfer",
+          "description": "You will receive the bank details after placing your order."
+        }
+      },
+      "notes": "Order notes (optional)",
+      "notesPlaceholder": "For example, additional delivery instructions",
+      "submit": "Place order and pay",
+      "terms": "By placing the order, you confirm your obligation to pay."
+    },
+
     "success": {
       "meta": {
         "title": "Order placed",

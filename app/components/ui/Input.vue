@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface Props {
   // INPUT
-  type?: 'text' | 'number'
+  type?: 'text' | 'number' | 'email' | 'tel'
   placeholder?: string
   autocomplete?: string
 

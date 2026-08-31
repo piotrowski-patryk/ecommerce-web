@@ -27,13 +27,6 @@ const summary = computed(() => ({
           currency: cart.currency,
         },
       },
-      {
-        label: t('cart.summary.shipping'),
-        value: {
-          amount: cart.shipping,
-          currency: cart.currency,
-        },
-      },
     ],
     payment: [
       {
@@ -261,9 +254,8 @@ useSeoMeta({
                 class="mt-1 size-4 accent-primary"
               >
               <span class="min-w-0 flex-1">
-                <span class="flex items-start justify-between gap-3 font-medium text-strong">
-                  <span>{{ $t(`checkout.form.delivery.${method}.title`) }}</span>
-                  <span class="shrink-0 text-sm">{{ $t('checkout.form.free') }}</span>
+                <span class="block font-medium text-strong">
+                  {{ $t(`checkout.form.delivery.${method}.title`) }}
                 </span>
                 <span class="mt-1 block text-sm text-muted">{{ $t(`checkout.form.delivery.${method}.description`) }}</span>
               </span>

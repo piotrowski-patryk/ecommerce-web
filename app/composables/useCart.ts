@@ -23,8 +23,7 @@ export function useCart() {
       0,
     ) ?? 0,
   )
-  const shipping = computed(() => 0)
-  const total = computed(() => subtotal.value + shipping.value)
+  const total = computed(() => subtotal.value)
   const currency = computed(() =>
     cart.value?.items[0]?.product.variant.price.currency ?? 'PLN',
   )
@@ -105,7 +104,6 @@ export function useCart() {
     meta,
     itemCount,
     subtotal,
-    shipping,
     total,
     currency,
     status: response.status,

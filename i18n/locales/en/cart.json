@@ -7,30 +7,20 @@
 
     "header": {
       "title": "Cart",
-      "description": "Review your selected products, check your cart contents, and proceed to the next step of the ordering process."
+      "description": "Review the products in your cart and proceed to place your order."
     },
 
     "table": {
       "products": "Products in cart",
       "quantity": "Quantity",
       "price": "Price",
-      "perUnit": "/ item",
-      "remove": "Remove {product} from cart"
-    },
-
-    "list": {
-      "title": "Products in cart",
-      "product": "Product",
-      "quantity": "Quantity",
-      "price": "Price",
-      "actions": "Actions",
+      "perUnit": "{price}/item",
       "remove": "Remove {product} from cart"
     },
 
     "summary": {
       "title": "Order summary",
       "subtotal": "Products subtotal",
-      "shipping": "Shipping",
       "total": "Total to pay",
       "checkout": "Proceed to checkout"
     },

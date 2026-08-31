@@ -39,7 +39,6 @@
         "cz": "Czechia",
         "sk": "Slovakia"
       },
-      "free": "Free",
       "delivery": {
         "title": "Delivery method",
         "courier": {
@@ -55,7 +54,7 @@
         "title": "Payment method",
         "online": {
           "title": "Online payment",
-          "description": "Pay by instant transfer or payment card."
+          "description": "Pay with BLIK, an instant bank transfer, or a payment card."
         },
         "transfer": {
           "title": "Bank transfer",

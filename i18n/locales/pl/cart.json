@@ -6,18 +6,18 @@
     },
     "header": {
       "title": "Koszyk",
-      "description": "Sprawdź produkty, wybierz sposób dostawy i przejdź dalej, aby złożyć zamówienie."
+      "description": "Sprawdź produkty w koszyku i przejdź dalej, aby złożyć zamówienie."
     },
     "table": {
       "products": "Produkty w koszyku",
       "quantity": "Ilość",
       "price": "Cena",
+      "perUnit": "{price}/szt.",
       "remove": "Usuń {product} z koszyka"
     },
     "summary": {
       "title": "Podsumowanie zamówienia",
       "subtotal": "Wartość produktów",
-      "shipping": "Dostawa",
       "total": "Do zapłaty",
       "checkout": "Przejdź do zamówienia"
     },

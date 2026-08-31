@@ -8,7 +8,7 @@ definePageMeta({
   },
 })
 
-const { t } = useI18n()
+const { n, t } = useI18n()
 const cart = useCart()
 
 useSeoMeta({
@@ -41,56 +41,61 @@ const table = computed(() => ({
       mobile: 'top-end' as const,
     },
   ],
-  body: cart.cart?.items.map(item => ({
-    key: item.id,
-    cells: [
-      {
-        label: item.product.name,
-        description: item.product.variant.name,
-        to: {
-          name: 'product-slug',
-          params: { slug: item.product.variant.slug },
-        },
-        media: item.product.variant.media
-          ? {
-              src: item.product.variant.media.url,
-              alt: item.product.variant.media.alt,
-            }
-          : undefined,
+  body: cart.cart?.items.map(item => ([
+    {
+      label: item.product.name,
+      description: item.product.variant.name,
+      to: {
+        name: 'product-slug',
+        params: { slug: item.product.variant.slug },
       },
-      {
-        select: {
-          value: item.quantity,
-          items: Array.from(
-            { length: Math.max(item.quantity, item.product.variant.stock) },
-            (_, index) => ({
-              label: String(index + 1),
-              value: index + 1,
+      media: item.product.variant.media
+        ? {
+            src: item.product.variant.media.url,
+            alt: item.product.variant.media.alt,
+          }
+        : undefined,
+    },
+    {
+      select: {
+        value: item.quantity,
+        items: Array.from(
+          { length: Math.max(item.quantity, item.product.variant.stock) },
+          (_, index) => ({
+            label: String(index + 1),
+            value: index + 1,
+          }),
+        ),
+        label: t('cart.table.quantity'),
+        disabled: cart.mutationPending,
+        onChange: (value: string | number | undefined) => cart.update(item.id, value),
+      },
+    },
+    {
+      value: {
+        amount: Number(item.product.variant.price.amount) * item.quantity,
+        currency: item.product.variant.price.currency,
+      },
+      description: item.quantity > 1
+        ? t('cart.table.perUnit', {
+            price: n(Number(item.product.variant.price.amount), {
+              style: 'currency',
+              currency: item.product.variant.price.currency,
             }),
-          ),
-          label: t('cart.table.quantity'),
-          disabled: cart.mutationPending,
-          onChange: (value: string | number | undefined) => cart.update(item.id, value),
-        },
+          })
+        : undefined,
+    },
+    {
+      action: {
+        label: t('cart.table.remove', { product: item.product.name }),
+        icon: 'cross',
+        color: 'error' as const,
+        variant: 'ghost' as const,
+        disabled: cart.mutationPending,
+        onClick: () => cart.remove(item.id),
       },
-      {
-        value: {
-          amount: Number(item.product.variant.price.amount),
-          currency: item.product.variant.price.currency,
-        },
-      },
-      {
-        action: {
-          label: t('cart.table.remove', { product: item.product.name }),
-          icon: 'cross',
-          color: 'error' as const,
-          variant: 'ghost' as const,
-          disabled: cart.mutationPending,
-          onClick: () => cart.remove(item.id),
-        },
-      },
-    ],
-  })) ?? [],
+    },
+  ])) ?? [],
 }))
 
 const summary = computed(() => ({
@@ -104,13 +109,6 @@ const summary = computed(() => ({
         label: t('cart.summary.subtotal'),
         value: {
           amount: cart.subtotal,
-          currency: cart.currency,
-        },
-      },
-      {
-        label: t('cart.summary.shipping'),
-        value: {
-          amount: cart.shipping,
           currency: cart.currency,
         },
       },
@@ -154,7 +152,7 @@ const summary = computed(() => ({
       :description="$t('cart.header.description')"
     />
 
-    <div class="container grid gap-8 pb-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
+    <div class="container grid gap-10 pb-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
       <section class="min-w-0">
         <Table v-bind="table" />
       </section>

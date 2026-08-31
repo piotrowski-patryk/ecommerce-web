@@ -77,16 +77,10 @@ interface TableCell {
   action?: TableAction
 }
 
-interface TableRow {
-  // CONTENT
-  key: string | number
-  cells: TableCell[]
-}
-
 interface Props {
   // CONTENT
   heading?: TableHeadingItem[]
-  body?: TableRow[]
+  body?: TableCell[][]
 }
 
 const {
@@ -97,16 +91,19 @@ const {
 
 <template>
   <table class="w-full">
-    <thead :class="heading.some(item => item.mobile) && 'block sm:table-header-group'">
+    <thead
+      class="border-b border-default"
+      :class="heading.some(item => item.mobile) && 'block sm:table-header-group'"
+    >
       <tr
-        class="border-b border-default text-sm font-semibold text-muted uppercase sm:h-14"
+        class="h-14 text-sm font-semibold text-muted uppercase"
         :class="heading.some(item => item.mobile) && 'block sm:table-row'"
       >
         <th
           v-for="(item, itemIndex) in heading"
           :key="itemIndex"
           scope="col"
-          class="py-0"
+          class="h-14 py-0 align-middle"
           :class="[
             {
               left: 'text-left',
@@ -139,13 +136,13 @@ const {
 
     <tbody class="divide-y divide-default">
       <tr
-        v-for="row in body"
-        :key="row.key"
+        v-for="(row, rowIndex) in body"
+        :key="rowIndex"
         :class="heading.some(item => item.mobile)
           && 'grid grid-cols-[5rem_minmax(0,1fr)_auto] grid-rows-[auto_auto] content-between gap-x-4 py-5 sm:table-row'"
       >
         <td
-          v-for="(item, itemIndex) in row.cells"
+          v-for="(item, itemIndex) in row"
           :key="itemIndex"
           :class="[
             {
@@ -188,19 +185,27 @@ const {
             @click="item.action.onClick"
           />
 
-          <span
+          <div
             v-else-if="item.value"
-            class="font-semibold tabular-nums text-strong"
           >
-            {{
-              typeof item.value.amount === 'number'
-                ? $n(item.value.amount, {
-                    style: 'currency',
-                    currency: item.value.currency ?? 'PLN',
-                  })
-                : item.value.amount
-            }}
-          </span>
+            <span class="font-semibold tabular-nums text-strong">
+              {{
+                typeof item.value.amount === 'number'
+                  ? $n(item.value.amount, {
+                      style: 'currency',
+                      currency: item.value.currency ?? 'PLN',
+                    })
+                  : item.value.amount
+              }}
+            </span>
+
+            <span
+              v-if="item.description"
+              class="mt-1 block text-xs text-muted"
+            >
+              {{ item.description }}
+            </span>
+          </div>
 
           <div
             v-else

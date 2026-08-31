@@ -2,10 +2,7 @@
   "common": {
     "action": {
       "loading": "Ładowanie...",
-      "remove": "Usuń",
-      "next": "Dalej",
-      "decrease": "Zmniejsz wartość",
-      "increase": "Zwiększ wartość"
+      "remove": "Usuń"
     },
 
     "header": {

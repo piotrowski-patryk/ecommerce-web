@@ -30,4 +30,5 @@ npm run dev
 | `npm run dev` | Uruchamia serwer developerski |
 | `npm run build` | Tworzy build produkcyjny |
 | `npm start` | Uruchamia serwer produkcyjny po wykonaniu buildu |
-| `npm run lint` | Sprawdza kod za pomocą ESLint |
+| `npm run lint` | Sprawdza kod za pomocą ESLint; błędy i ostrzeżenia powodują niepowodzenie |
+| `npm run lint:fix` | Automatycznie poprawia problemy obsługiwane przez reguły ESLint |

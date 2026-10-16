@@ -1,9 +1,19 @@
 {
   "name": "ecommerce-web",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "private": false,
+  "description": "Aplikacja e-commerce zbudowana z wykorzystaniem Next.js, React, TypeScript i Tailwind CSS.",
+  "keywords": [
+    "ecommerce",
+    "nextjs",
+    "react",
+    "typescript",
+    "tailwindcss"
+  ],
+  "license": "UNLICENSED",
+  "author": "Patryk Piotrowski",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 3000",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

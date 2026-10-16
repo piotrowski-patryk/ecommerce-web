@@ -10,6 +10,14 @@
     "typescript",
     "tailwindcss"
   ],
+  "homepage": "https://github.com/piotrowski-patryk/ecommerce-web#readme",
+  "bugs": {
+    "url": "https://github.com/piotrowski-patryk/ecommerce-web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piotrowski-patryk/ecommerce-web.git"
+  },
   "license": "UNLICENSED",
   "author": "Patryk Piotrowski",
   "scripts": {

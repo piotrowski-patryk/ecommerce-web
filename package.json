@@ -2,7 +2,7 @@
   "name": "ecommerce-web",
   "version": "0.0.1",
   "private": false,
-  "description": "Aplikacja e-commerce zbudowana z wykorzystaniem Next.js, React, TypeScript i Tailwind CSS.",
+  "description": "Platforma e-commerce łącząca panel klienta z narzędziami do zarządzania sklepem",
   "keywords": [
     "ecommerce",
     "nextjs",

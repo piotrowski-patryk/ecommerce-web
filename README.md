@@ -22,6 +22,32 @@ npm ci
 npm run dev
 ```
 
+### Uruchomienie w Dockerze
+
+Wymagane są Docker i Docker Compose. Z katalogu repozytorium uruchom:
+
+```bash
+docker compose up --build -d
+```
+
+Frontend będzie dostępny pod adresem [http://localhost:3030](http://localhost:3030).
+Kontener uruchamia produkcyjny build Next.js na porcie 3000, mapowanym przez Compose na port 3030 komputera.
+Jeśli port 3030 jest zajęty, ustaw zmienną `FRONTEND_PORT` na inny wolny port przed uruchomieniem Compose.
+
+```bash
+docker compose logs -f frontend # podgląd logów
+docker compose down             # zatrzymanie kontenera
+```
+
+Sam obraz można też zbudować i uruchomić bez Compose:
+
+```bash
+docker build -t ecommerce-web .
+docker run --rm -p 3030:3000 ecommerce-web
+```
+
+Obecny frontend nie korzysta jeszcze z API backendu. Przy dodawaniu integracji trzeba skonfigurować adres API dla środowiska kontenerowego; adres `localhost` wewnątrz kontenera wskazuje sam kontener. Zmienne `NEXT_PUBLIC_*` są zapisywane w kodzie przeglądarki podczas budowania obrazu, więc ich zmiana wymaga ponownego buildu.
+
 ### Skrypty
 
 | Polecenie | Opis |

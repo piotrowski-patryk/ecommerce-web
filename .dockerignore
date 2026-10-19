@@ -1,0 +1,13 @@
+.git
+.next
+node_modules
+.env*
+.vscode
+coverage
+out
+build
+npm-debug.log*
+Dockerfile*
+compose*.yaml
+README.md
+docs

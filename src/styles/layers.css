@@ -1,0 +1,20 @@
+@layer base {
+  :root {
+    --header-height: 4rem;
+    color-scheme: light dark;
+  }
+
+  body {
+    background: var(--background-color-default);
+    color: var(--text-color-default);
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--text-color-strong);
+  }
+}

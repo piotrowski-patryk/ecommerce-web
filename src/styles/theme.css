@@ -1,0 +1,29 @@
+@theme inline {
+  --color-primary: light-dark(#0969da, #4493f8);
+  --color-secondary: light-dark(#8250df, #ab7df8);
+  --color-success: light-dark(#1a7f37, #3fb950);
+  --color-info: light-dark(#0969da, #4493f8);
+  --color-warning: light-dark(#9a6700, #d29922);
+  --color-error: light-dark(#d1242f, #f85149);
+
+  /* Text */
+  --text-color-muted: light-dark(#59636e, #9198a1);
+  --text-color-default: light-dark(#1f2328, #f0f6fc);
+  --text-color-strong: light-dark(#1f2328, #f0f6fc);
+  --text-color-inverted: light-dark(#ffffff, #010409);
+
+  /* Background */
+  --background-color-muted: light-dark(#f6f8fa, #151b23);
+  --background-color-default: light-dark(#ffffff, #0d1117);
+  --background-color-strong: light-dark(#25292e, #3d444d);
+  --background-color-inverted: light-dark(#25292e, #ffffff);
+
+  /* Border */
+  --border-color-muted: light-dark(#d1d9e0b3, #3d444db3);
+  --border-color-default: light-dark(#d1d9e0, #3d444d);
+  --border-color-strong: light-dark(#818b98, #656c76);
+  --border-color-inverted: light-dark(#1f2328, #f0f6fc);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}

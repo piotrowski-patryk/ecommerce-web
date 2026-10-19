@@ -1,34 +1,17 @@
-import type { ComponentType, SVGProps } from "react";
-
-type SvgIcon = ComponentType<SVGProps<SVGSVGElement>>;
-
-const icons = import.meta.glob<SvgIcon>(
-  "/src/assets/icons/*.svg",
-  { eager: true, import: "default" },
-);
-
 type IconProps = {
   name: string;
   className?: string;
 };
 
-export function Icon({ name, className = "" }: IconProps) {
-  const Svg = icons[`/src/assets/icons/${name}.svg`];
-
-  if (!Svg) return null;
+export async function Icon({ name, className = "" }: IconProps) {
+  
+  const svg = (await import(`../../assets/icons/${name}.svg?raw`)).default;
 
   return (
-    <Svg
-      width={24}
-      height={24}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <span
       aria-hidden="true"
-      focusable="false"
-      className={`shrink-0 ${className}`}
+      className={`inline-flex size-6 fill-none stroke-current stroke-2 [&>svg]:size-full ${className}`}
+      dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
 }

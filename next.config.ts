@@ -11,8 +11,8 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
       "*.svg": {
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
+        condition: { query: "?raw" },
+        type: "text",
       },
     },
   },

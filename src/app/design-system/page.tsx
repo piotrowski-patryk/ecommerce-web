@@ -4,6 +4,7 @@ import { DesignSystemSpecimen } from "@/components/design-system/specimen";
 import { FormShowcase } from "@/components/design-system/form-showcase";
 import { QuantityShowcase } from "@/components/design-system/quantity-showcase";
 import { StatusIndicatorsShowcase } from "@/components/design-system/status-indicators-showcase";
+import { InfoCardShowcase } from "@/components/design-system/info-card-showcase";
 
 const typeStyles = [
   {
@@ -128,6 +129,7 @@ export default function DesignSystemPage() {
       <FormShowcase />
       <QuantityShowcase />
       <StatusIndicatorsShowcase />
+      <InfoCardShowcase />
     </div>
   );
 }

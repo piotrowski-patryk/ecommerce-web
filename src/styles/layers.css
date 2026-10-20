@@ -4,6 +4,10 @@
     color-scheme: light dark;
   }
 
+  :root:has(#design-system-root) {
+    color-scheme: light;
+  }
+
   body {
     background: var(--background-color-default);
     color: var(--text-color-default);

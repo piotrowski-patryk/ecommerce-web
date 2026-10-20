@@ -1,6 +1,7 @@
 import { DesignSystemPageHeader } from "@/components/design-system/page-header";
 import { DesignSystemSection } from "@/components/design-system/section";
 import { DesignSystemSpecimen } from "@/components/design-system/specimen";
+import { FormShowcase } from "@/components/design-system/form-showcase";
 
 const typeStyles = [
   {
@@ -45,11 +46,11 @@ const weights = [
 
 export default function DesignSystemPage() {
   return (
-    <div className="container space-y-14 py-10 sm:py-16">
+    <div id="design-system-root" className="container space-y-14 py-10 sm:py-16">
       <DesignSystemPageHeader
         index="01"
-        title="Typografia"
-        description="Poppins nadaje interfejsowi czytelny, geometryczny charakter. Poniżej znajdziesz podstawowe style tekstu używane w projekcie."
+        title="Design system"
+        description="Typografia i kontrolki formularzy używane w sklepie. Przykłady pól oraz wyborów poniżej można obsłużyć klawiaturą."
       />
 
       <DesignSystemSection id="font-family-heading" title="Krój pisma">
@@ -122,6 +123,7 @@ export default function DesignSystemPage() {
           aą b cć d eę f g h i j k lł m nń oó p r sś t u w y zźż
         </p>
       </DesignSystemSection>
+      <FormShowcase />
     </div>
   );
 }

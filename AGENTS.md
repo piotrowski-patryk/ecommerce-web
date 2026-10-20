@@ -1,3 +1,12 @@
+## Wspólne komponenty formularzy
+
+W ekranach aplikacji używaj `Input` z `src/components/ui/input.tsx` dla typów `text`,
+`email`, `search` i `password` oraz `RadioGroup` z `src/components/ui/radio-group.tsx`
+dla wyboru dostawy, płatności, rozmiaru i koloru. Nie duplikuj ich stylów ani logiki
+w komponentach ekranów. Szczegóły API i walidacji: `docs/ui/forms.md`; przykłady
+stanów: `/design-system`. Jeśli potrzebny jest nowy rodzaj kontrolki, rozszerz
+warstwę wspólnych komponentów i uzupełnij dokumentację oraz design system.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

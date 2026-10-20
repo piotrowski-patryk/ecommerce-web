@@ -58,6 +58,18 @@ Obecny frontend nie korzysta jeszcze z API backendu. Przy dodawaniu integracji t
 | `npm run lint` | Sprawdza kod za pomocą ESLint; błędy i ostrzeżenia powodują niepowodzenie |
 | `npm run lint:fix` | Automatycznie poprawia problemy obsługiwane przez reguły ESLint |
 
+## Komponenty UI
+
+W nowych ekranach korzystaj ze wspólnych komponentów z `src/components/ui/`. Dla pól tekstowych
+(`text`, `email`, `search`, `password`) używaj `Input`, a dla wyboru jednej opcji (dostawa,
+płatność, rozmiar, kolor) używaj `RadioGroup`. Nie kopiuj ich wyglądu i zachowania do komponentów
+konkretnego ekranu.
+
+API, przykłady użycia i zasady walidacji opisuje [dokumentacja pól formularzy](docs/ui/forms.md).
+Warianty oraz stany można obejrzeć po uruchomieniu aplikacji na [`/design-system`](http://localhost:3000/design-system).
+Gdy ekran wymaga kontrolki, której wspólne komponenty nie obsługują, dodaj ją do warstwy UI
+i uzupełnij dokumentację oraz przykłady w design systemie.
+
 ## 📜 Licencja
 
 Copyright (c) 2026 [Patryk Piotrowski](https://github.com/piotrowski-patryk) & [Piotr Ostrowski](https://github.com/PiotrO9). All rights reserved.

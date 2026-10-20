@@ -3,6 +3,7 @@ import { DesignSystemSection } from "@/components/design-system/section";
 import { DesignSystemSpecimen } from "@/components/design-system/specimen";
 import { FormShowcase } from "@/components/design-system/form-showcase";
 import { QuantityShowcase } from "@/components/design-system/quantity-showcase";
+import { StatusIndicatorsShowcase } from "@/components/design-system/status-indicators-showcase";
 
 const typeStyles = [
   {
@@ -51,7 +52,7 @@ export default function DesignSystemPage() {
       <DesignSystemPageHeader
         index="01"
         title="Design system"
-        description="Typografia i kontrolki formularzy używane w sklepie. Przykłady pól oraz wyborów poniżej można obsłużyć klawiaturą."
+        description="Typografia, znaczniki informacyjne i kontrolki formularzy używane w sklepie. Przykłady pól oraz wyborów poniżej można obsłużyć klawiaturą."
       />
 
       <DesignSystemSection id="font-family-heading" title="Krój pisma">
@@ -126,6 +127,7 @@ export default function DesignSystemPage() {
       </DesignSystemSection>
       <FormShowcase />
       <QuantityShowcase />
+      <StatusIndicatorsShowcase />
     </div>
   );
 }

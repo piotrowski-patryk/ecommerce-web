@@ -7,6 +7,11 @@ w komponentach ekranów. Szczegóły API i walidacji: `docs/ui/forms.md`; przyk�
 stanów: `/design-system`. Jeśli potrzebny jest nowy rodzaj kontrolki, rozszerz
 warstwę wspólnych komponentów i uzupełnij dokumentację oraz design system.
 
+## Nazwy commitów
+
+Gdy użytkownik prosi o nazwę lub treść commita, zastosuj skill
+`docs/skills/commit-message/SKILL.md`.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

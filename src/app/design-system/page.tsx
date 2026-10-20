@@ -6,6 +6,7 @@ import { QuantityShowcase } from "@/components/design-system/quantity-showcase";
 import { StatusIndicatorsShowcase } from "@/components/design-system/status-indicators-showcase";
 import { InfoCardShowcase } from "@/components/design-system/info-card-showcase";
 import { ListStatesShowcase } from "@/components/design-system/list-states-showcase";
+import { ModalShowcase } from "@/components/design-system/modal-showcase";
 
 const typeStyles = [
   {
@@ -132,6 +133,7 @@ export default function DesignSystemPage() {
       <StatusIndicatorsShowcase />
       <InfoCardShowcase />
       <ListStatesShowcase />
+      <ModalShowcase />
     </div>
   );
 }

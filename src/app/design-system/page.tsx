@@ -2,6 +2,7 @@ import { DesignSystemPageHeader } from "@/components/design-system/page-header";
 import { DesignSystemSection } from "@/components/design-system/section";
 import { DesignSystemSpecimen } from "@/components/design-system/specimen";
 import { FormShowcase } from "@/components/design-system/form-showcase";
+import { QuantityShowcase } from "@/components/design-system/quantity-showcase";
 
 const typeStyles = [
   {
@@ -124,6 +125,7 @@ export default function DesignSystemPage() {
         </p>
       </DesignSystemSection>
       <FormShowcase />
+      <QuantityShowcase />
     </div>
   );
 }

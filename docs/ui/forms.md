@@ -88,3 +88,5 @@ Każdy kolor ma tekstową nazwę w `label`, nawet jeśli wizualnie widać tylko 
 `readOnly` dotyczy pól tekstowych; natywna grupa `radio` nie ma takiego stanu.
 Przyciski formularza należą do osobnego komponentu `Button`. Licznik ilości oraz
 filtry rozwijane nie należą do tego zestawu.
+Licznik ilości jest osobną wspólną kontrolką UI opisaną w
+[`quantity-counter.md`](quantity-counter.md).

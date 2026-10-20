@@ -62,6 +62,9 @@ serwera pozostaje konieczna niezależnie od walidacji w przeglądarce.
 
 ## `RadioGroup`
 
+Pełne API, dane wariantów i scenariusz zmiany dostępności opisuje
+[`radio-group.md`](radio-group.md).
+
 ```tsx
 import { RadioGroup } from "@/components/ui/radio-group";
 
@@ -69,6 +72,8 @@ import { RadioGroup } from "@/components/ui/radio-group";
   name="size"
   legend="Rozmiar"
   variant="size"
+  value={size}
+  onValueChange={setSize}
   options={[
     { value: "S", label: "S" },
     { value: "M", label: "M" },
@@ -80,10 +85,20 @@ import { RadioGroup } from "@/components/ui/radio-group";
 Warianty wyglądu to `card` (dostawa i płatność), `size` (rozmiar) i `color`
 (próbki kolorów). Wszystkie zachowują natywną semantykę grupy pól `radio`:
 jedną wybraną wartość pod wspólnym `name`, nawigację strzałkami i zaznaczanie
-klawiaturą. Grupa przyjmuje `defaultValue` albo parę `value` / `onValueChange`.
+klawiaturą. W ekranach aplikacji przekazuj parę `value` / `onValueChange`;
+`value=""` oznacza brak wyboru. Istniejące użycia z `defaultValue` pozostają
+obsługiwane, lecz nie reagują na późniejszą zmianę wartości z formularza.
 `required` wymaga wyboru w formularzu; `disabled` może dotyczyć całej grupy
 lub pojedynczej opcji. `error` pokazuje komunikat i oznacza opcje jako błędne.
 Każdy kolor ma tekstową nazwę w `label`, nawet jeśli wizualnie widać tylko próbkę.
+Opcja `card` może mieć `description`, dekoracyjne `icon` oraz `trailingText`
+na informację po prawej, np. cenę; opis i tekst po prawej są powiązane z opcją
+także dla czytnika ekranu.
+
+Jeżeli dostępność wybranej opcji zmieni się na `disabled`, ekran powinien
+wyczyścić swoją wartość i przekazać `error`, gdy wybór jest wymagany. Grupa
+nie przechowuje osobnego stanu wyboru ani nie narzuca reguł dostępności.
+Interaktywny przykład tego scenariusza znajduje się na `/design-system`.
 
 `readOnly` dotyczy pól tekstowych; natywna grupa `radio` nie ma takiego stanu.
 Przyciski formularza należą do osobnego komponentu `Button`. Licznik ilości oraz

@@ -1,18 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { DesignSystemSection } from "@/components/design-system/section";
 import { DesignSystemSpecimen } from "@/components/design-system/specimen";
 import { Input } from "@/components/ui/input";
 import { RadioGroup } from "@/components/ui/radio-group";
 
 const deliveryOptions = [
-  { value: "standard", label: "Standard Delivery", description: "3–5 business days · Free" },
-  { value: "express", label: "Express Delivery", description: "1–2 business days · $14.90" },
-  { value: "pickup", label: "Store Pickup", description: "NÉORA SoHo · Free" },
+  { value: "standard", label: "Standard Delivery", description: "3–5 business days", trailingText: "Free" },
+  { value: "express", label: "Express Delivery", description: "1–2 business days", trailingText: "$14.90" },
+  { value: "pickup", label: "Store Pickup", description: "NÉORA SoHo", trailingText: "Free" },
 ];
 
 const paymentOptions = [
-  { value: "card", label: "Visa •••• 4242", description: "Expires 08/29" },
+  { value: "card", label: "Visa •••• 4242", description: "Expires 08/29", icon: <PaymentCardIcon /> },
   { value: "apple", label: "Apple Pay", description: "Confirm with Face ID" },
   { value: "cash", label: "Cash on Delivery", description: "Pay the courier" },
 ];
@@ -21,12 +22,26 @@ const sizeOptions = ["XS", "S", "M", "L"].map((size) => ({ value: size, label: s
 
 const colorOptions = [
   { value: "blue", label: "Niebieski", color: "#3169a9" },
+  { value: "cream", label: "Kremowy", color: "#f5e9cf" },
   { value: "ochre", label: "Ochra", color: "#d6972c" },
   { value: "burgundy", label: "Bordowy", color: "#81314f" },
   { value: "forest", label: "Zielony", color: "#285c4c" },
 ];
 
 export function FormShowcase() {
+  const [delivery, setDelivery] = useState("standard");
+  const [payment, setPayment] = useState("");
+  const [size, setSize] = useState("S");
+  const [color, setColor] = useState("blue");
+  const [requiredSize, setRequiredSize] = useState("");
+  const [stockSize, setStockSize] = useState("M");
+  const [mediumAvailable, setMediumAvailable] = useState(true);
+
+  const stockOptions = sizeOptions.map((option) => ({
+    ...option,
+    disabled: option.value === "M" && !mediumAvailable,
+  }));
+
   return (
     <>
       <div className="border-t border-default pt-14">
@@ -101,7 +116,8 @@ export function FormShowcase() {
               name="demo-delivery"
               legend="Sposób dostawy"
               options={deliveryOptions}
-              defaultValue="standard"
+              value={delivery}
+              onValueChange={setDelivery}
               required
             />
           </div>
@@ -110,7 +126,9 @@ export function FormShowcase() {
               name="demo-payment"
               legend="Sposób płatności"
               options={paymentOptions}
-              defaultValue="card"
+              value={payment}
+              onValueChange={setPayment}
+              hint="Przykład zaczyna się bez zaznaczonej opcji."
               required
             />
           </div>
@@ -120,7 +138,8 @@ export function FormShowcase() {
               legend="Rozmiar"
               options={sizeOptions}
               variant="size"
-              defaultValue="S"
+              value={size}
+              onValueChange={setSize}
               required
             />
           </div>
@@ -130,7 +149,8 @@ export function FormShowcase() {
               legend="Kolor"
               options={colorOptions}
               variant="color"
-              defaultValue="blue"
+              value={color}
+              onValueChange={setColor}
               required
             />
           </div>
@@ -174,9 +194,34 @@ export function FormShowcase() {
               legend="Wybierz rozmiar"
               options={sizeOptions}
               variant="size"
-              error="Wybierz rozmiar przed dodaniem produktu do koszyka."
+              value={requiredSize}
+              onValueChange={setRequiredSize}
+              error={requiredSize ? undefined : "Wybierz rozmiar przed dodaniem produktu do koszyka."}
               required
             />
+          </div>
+          <div className="sm:col-span-2">
+            <RadioGroup
+              name="demo-stock-change"
+              legend="Dostępność rozmiaru"
+              options={stockOptions}
+              variant="size"
+              value={stockSize}
+              onValueChange={setStockSize}
+              error={!stockSize ? "Wybrany rozmiar jest niedostępny. Wybierz ponownie." : undefined}
+              required
+            />
+            <button
+              className="mt-4 rounded-lg border border-default px-3 py-2 text-sm text-default hover:bg-muted focus-visible:outline-3 focus-visible:outline-primary/25"
+              type="button"
+              onClick={() => {
+                const nextAvailable = !mediumAvailable;
+                setMediumAvailable(nextAvailable);
+                if (!nextAvailable && stockSize === "M") setStockSize("");
+              }}
+            >
+              {mediumAvailable ? "Oznacz M jako niedostępny" : "Przywróć dostępność M"}
+            </button>
           </div>
           <div className="sm:col-span-2">
             <RadioGroup
@@ -208,4 +253,8 @@ function SearchIcon() {
 
 function TicketIcon() {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M3 6h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4V6Z" /><path d="M12 6v12" strokeDasharray="2 2" /></svg>;
+}
+
+function PaymentCardIcon() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /></svg>;
 }

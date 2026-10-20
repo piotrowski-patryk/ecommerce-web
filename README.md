@@ -66,6 +66,7 @@ płatność, rozmiar, kolor) używaj `RadioGroup`. Nie kopiuj ich wyglądu i zac
 konkretnego ekranu.
 
 API, przykłady użycia i zasady walidacji opisuje [dokumentacja pól formularzy](docs/ui/forms.md).
+Wybór rozmiaru, koloru, dostawy i płatności opisuje też [dokumentacja RadioGroup](docs/ui/radio-group.md).
 Warianty oraz stany można obejrzeć po uruchomieniu aplikacji na [`/design-system`](http://localhost:3000/design-system).
 Gdy ekran wymaga kontrolki, której wspólne komponenty nie obsługują, dodaj ją do warstwy UI
 i uzupełnij dokumentację oraz przykłady w design systemie.

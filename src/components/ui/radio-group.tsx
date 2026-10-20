@@ -6,6 +6,7 @@ export type RadioOption = {
   value: string;
   label: string;
   description?: string;
+  trailingText?: string;
   icon?: ReactNode;
   color?: string;
   disabled?: boolean;
@@ -61,7 +62,8 @@ export function RadioGroup({
         {options.map((option, index) => {
           const optionId = `${groupId}-${index}`;
           const descriptionId = option.description ? `${optionId}-description` : undefined;
-          const optionDescribedBy = [descriptionId, describedBy].filter(Boolean).join(" ") || undefined;
+          const trailingId = variant === "card" && option.trailingText ? `${optionId}-trailing` : undefined;
+          const optionDescribedBy = [descriptionId, trailingId, describedBy].filter(Boolean).join(" ") || undefined;
           return (
             <div className="ui-radio-option" key={option.value}>
               <input
@@ -96,7 +98,10 @@ export function RadioGroup({
                       <span className="ui-radio-card-title">{option.label}</span>
                       {option.description && <span id={descriptionId} className="ui-radio-card-description">{option.description}</span>}
                     </span>
-                    <span className="ui-radio-indicator" aria-hidden="true"><CheckIcon /></span>
+                    <span className="ui-radio-card-aside">
+                      {option.trailingText && <span id={trailingId} className="ui-radio-card-trailing">{option.trailingText}</span>}
+                      <span className="ui-radio-indicator" aria-hidden="true"><CheckIcon /></span>
+                    </span>
                   </>
                 )}
               </label>

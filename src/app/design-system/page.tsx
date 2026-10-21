@@ -1,5 +1,3 @@
-import { Icon } from "@/components/ui/icon";
-
 export default function DesignSystemPage() {
   return (
     <div className="container">

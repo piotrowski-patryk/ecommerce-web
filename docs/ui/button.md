@@ -3,6 +3,8 @@
 Komponent znajduje się w `src/components/ui/button.tsx`. Ma trzy sekcje:
 importy, typy oraz funkcję komponentu. Stosuje wspólny
 [wzór komponentów UI](./component-pattern.md).
+Przykłady wszystkich kolorów i wariantów, rozmiarów, ikon oraz stanów
+znajdują się na stronie `/design-system` w sekcji „Przyciski systemowe”.
 `ButtonProps` łączy własne propsy przez `&` z `React.ComponentProps<"button">`
 z Reacta. Typ ten dodaje standardowe atrybuty przycisku, w tym
 `children`, `disabled` i `onClick`. Funkcja odczytuje własne propsy osobno,

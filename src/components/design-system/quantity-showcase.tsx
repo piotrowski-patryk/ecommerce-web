@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DesignSystemSection } from "@/components/design-system/section";
 import { DesignSystemSpecimen } from "@/components/design-system/specimen";
 import { QuantityCounter } from "@/components/ui/quantity-counter";
+import Button from "@/components/ui/button";
 
 export function QuantityShowcase() {
   const [minimumValue, setMinimumValue] = useState(1);
@@ -27,9 +28,8 @@ export function QuantityShowcase() {
         <DesignSystemSpecimen name="Maksimum" details={`Limit ${maximum} · plus nieaktywny przy limicie`}>
           <div className="flex flex-wrap items-center gap-4">
             <QuantityCounter value={limitedValue} max={maximum} onValueChange={setLimitedValue} />
-            <button
-              className="rounded-lg border border-default px-3 py-2 text-sm text-default hover:bg-muted focus-visible:outline-3 focus-visible:outline-primary/25"
-              type="button"
+            <Button
+              variant="outline"
               onClick={() => {
                 const nextMaximum = maximum === 3 ? 5 : 3;
                 setMaximum(nextMaximum);
@@ -37,7 +37,7 @@ export function QuantityShowcase() {
               }}
             >
               Zmień limit na {maximum === 3 ? 5 : 3}
-            </button>
+            </Button>
           </div>
         </DesignSystemSpecimen>
         <DesignSystemSpecimen name="Zapisywanie" details="Spinner na liczbie i zablokowane przyciski">

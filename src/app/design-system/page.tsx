@@ -7,6 +7,7 @@ import { StatusIndicatorsShowcase } from "@/components/design-system/status-indi
 import { InfoCardShowcase } from "@/components/design-system/info-card-showcase";
 import { ListStatesShowcase } from "@/components/design-system/list-states-showcase";
 import { ModalShowcase } from "@/components/design-system/modal-showcase";
+import { ButtonShowcase } from "@/components/design-system/button-showcase";
 
 const typeStyles = [
   {
@@ -55,7 +56,7 @@ export default function DesignSystemPage() {
       <DesignSystemPageHeader
         index="01"
         title="Design system"
-        description="Typografia, znaczniki informacyjne i kontrolki formularzy używane w sklepie. Przykłady pól oraz wyborów poniżej można obsłużyć klawiaturą."
+        description="Typografia, przyciski, znaczniki informacyjne i kontrolki formularzy używane w sklepie. Przykłady poniżej można obsłużyć klawiaturą."
       />
 
       <DesignSystemSection id="font-family-heading" title="Krój pisma">
@@ -128,6 +129,7 @@ export default function DesignSystemPage() {
           aą b cć d eę f g h i j k lł m nń oó p r sś t u w y zźż
         </p>
       </DesignSystemSection>
+      <ButtonShowcase />
       <FormShowcase />
       <QuantityShowcase />
       <StatusIndicatorsShowcase />

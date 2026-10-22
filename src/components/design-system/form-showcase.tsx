@@ -5,6 +5,7 @@ import { DesignSystemSection } from "@/components/design-system/section";
 import { DesignSystemSpecimen } from "@/components/design-system/specimen";
 import { Input } from "@/components/ui/input";
 import { RadioGroup } from "@/components/ui/radio-group";
+import Button from "@/components/ui/button";
 
 const deliveryOptions = [
   { value: "standard", label: "Standard Delivery", description: "3–5 business days", trailingText: "Free" },
@@ -46,7 +47,7 @@ export function FormShowcase() {
     <>
       <div className="border-t border-default pt-14">
         <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-primary uppercase">
-          Design system / 02
+          Design system / 03
         </p>
         <h2 className="text-4xl font-semibold text-strong sm:text-5xl">Pola formularza</h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
@@ -211,9 +212,9 @@ export function FormShowcase() {
               error={!stockSize ? "Wybrany rozmiar jest niedostępny. Wybierz ponownie." : undefined}
               required
             />
-            <button
-              className="mt-4 rounded-lg border border-default px-3 py-2 text-sm text-default hover:bg-muted focus-visible:outline-3 focus-visible:outline-primary/25"
-              type="button"
+            <Button
+              className="mt-4"
+              variant="outline"
               onClick={() => {
                 const nextAvailable = !mediumAvailable;
                 setMediumAvailable(nextAvailable);
@@ -221,7 +222,7 @@ export function FormShowcase() {
               }}
             >
               {mediumAvailable ? "Oznacz M jako niedostępny" : "Przywróć dostępność M"}
-            </button>
+            </Button>
           </div>
           <div className="sm:col-span-2">
             <RadioGroup

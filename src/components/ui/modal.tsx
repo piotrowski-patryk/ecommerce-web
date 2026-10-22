@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, type MouseEvent, type ReactNode } from "react";
-import { Button } from "@/components/ui/buttons";
+import Button from "@/components/ui/button";
 
 export type ModalProps = {
   open: boolean;

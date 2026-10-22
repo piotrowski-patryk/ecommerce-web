@@ -1,28 +1,28 @@
 @theme inline {
-  --color-primary: light-dark(#0969da, #4493f8);
-  --color-secondary: light-dark(#8250df, #ab7df8);
-  --color-success: light-dark(#1a7f37, #3fb950);
-  --color-info: light-dark(#0969da, #4493f8);
-  --color-warning: light-dark(#9a6700, #d29922);
-  --color-error: light-dark(#d1242f, #f85149);
+  --color-primary: light-dark(#17131f, #f4f2f7);
+  --color-secondary: light-dark(#6f6b78, #b3afbc);
+  --color-success: light-dark(#15803d, #4ade80);
+  --color-info: light-dark(#2563eb, #60a5fa);
+  --color-warning: light-dark(#a16207, #facc15);
+  --color-error: light-dark(#c9364f, #fb7185);
 
   /* Text */
-  --text-color-muted: light-dark(#59636e, #9198a1);
-  --text-color-default: light-dark(#1f2328, #f0f6fc);
-  --text-color-strong: light-dark(#1f2328, #f0f6fc);
-  --text-color-inverted: light-dark(#ffffff, #010409);
+  --text-color-muted: light-dark(#6f6b78, #aaa5b3);
+  --text-color-default: light-dark(#272231, #e8e6ee);
+  --text-color-strong: light-dark(#17131f, #faf9fc);
+  --text-color-inverted: light-dark(#ffffff, #17131f);
 
   /* Background */
-  --background-color-muted: light-dark(#f6f8fa, #151b23);
-  --background-color-default: light-dark(#ffffff, #0d1117);
-  --background-color-strong: light-dark(#25292e, #3d444d);
-  --background-color-inverted: light-dark(#25292e, #ffffff);
+  --background-color-muted: light-dark(#f4f5f7, #1c1824);
+  --background-color-default: light-dark(#ffffff, #121016);
+  --background-color-strong: light-dark(#272231, #35303f);
+  --background-color-inverted: light-dark(#17131f, #f4f2f7);
 
   /* Border */
-  --border-color-muted: light-dark(#d1d9e0b3, #3d444db3);
-  --border-color-default: light-dark(#d1d9e0, #3d444d);
-  --border-color-strong: light-dark(#818b98, #656c76);
-  --border-color-inverted: light-dark(#1f2328, #f0f6fc);
+  --border-color-muted: light-dark(#f0f0f3, #26212f);
+  --border-color-default: light-dark(#e8e9ed, #35303f);
+  --border-color-strong: light-dark(#8f8f9c, #756e81);
+  --border-color-inverted: light-dark(#17131f, #f4f2f7);
 
   --font-sans: var(--font-poppins);
 }

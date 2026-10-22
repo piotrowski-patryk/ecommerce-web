@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { DesignSystemSection } from "@/components/design-system/section";
 import { DesignSystemSpecimen } from "@/components/design-system/specimen";
-import { Button } from "@/components/ui/buttons";
+import Button from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 
 type Example = "info" | "confirm" | "destructive" | "long";
@@ -36,7 +36,7 @@ export function ModalShowcase() {
         <div className="overflow-hidden rounded-2xl border border-default">
           {examples.map((example) => (
             <DesignSystemSpecimen key={example.id} name={example.name} details={example.details}>
-              <Button variant={example.id === "destructive" ? "destructive" : "outline"} onClick={() => { setMessage(""); setActive(example.id); }}>
+              <Button color={example.id === "destructive" ? "error" : "primary"} variant={example.id === "destructive" ? "solid" : "outline"} onClick={() => { setMessage(""); setActive(example.id); }}>
                 {example.trigger}
               </Button>
             </DesignSystemSpecimen>
@@ -70,7 +70,7 @@ export function ModalShowcase() {
         onClose={close}
         title="Usunąć zapisany adres?"
         description="Tej czynności nie można cofnąć."
-        actions={<><Button variant="outline" onClick={close}>Anuluj</Button><Button variant="destructive" onClick={() => finish("Przykładowy adres został usunięty.")}>Usuń adres</Button></>}
+        actions={<><Button variant="outline" onClick={close}>Anuluj</Button><Button color="error" onClick={() => finish("Przykładowy adres został usunięty.")}>Usuń adres</Button></>}
       >
         <p>Sprawdź, czy nie używasz tego adresu przy trwającym zamówieniu.</p>
       </Modal>

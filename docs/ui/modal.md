@@ -8,7 +8,7 @@ potwierdzeń wymagających skupienia uwagi. Interaktywne przykłady znajdują si
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/buttons";
+import Button from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 
 export function DeleteAddress() {
@@ -25,7 +25,7 @@ export function DeleteAddress() {
         actions={
           <>
             <Button variant="outline" onClick={() => setOpen(false)}>Anuluj</Button>
-            <Button variant="destructive" onClick={() => {/* logika ekranu */}}>Usuń</Button>
+            <Button color="error" onClick={() => {/* logika ekranu */}}>Usuń</Button>
           </>
         }
       >

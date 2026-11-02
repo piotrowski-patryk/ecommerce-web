@@ -2,6 +2,7 @@ import clock from "@/assets/icons/clock.svg?raw";
 import loaderCircle from "@/assets/icons/loader-circle.svg?raw";
 import menu from "@/assets/icons/menu.svg?raw";
 import shoppingBag from "@/assets/icons/shopping-bag.svg?raw";
+import arrowLeft from "@/assets/icons/arrow-left.svg?raw";
 
 type IconProps = React.ComponentProps<"span"> & {
   name?: string;
@@ -24,6 +25,7 @@ const icons: Record<string, string> = {
   "loader-circle": loaderCircle,
   menu,
   "shopping-bag": shoppingBag,
+  "arrow-left": arrowLeft,
 };
 
 export default function Icon({ name, size = "xl", className, ...rest }: IconProps) {

@@ -10,127 +10,108 @@ z Reacta. Typ ten dodaje standardowe atrybuty przycisku, w tym
 `children`, `disabled` i `onClick`. Funkcja odczytuje własne propsy osobno,
 a pozostałe przekazuje do `<button>` przez `...rest`.
 
-Style znajdują się w tym samym pliku `button.tsx`, w obiekcie `styles`.
-Mapy `variant`, `color` i `size` oraz style `block` i `loading`
-odpowiadają propsom komponentu.
-Każdy rozmiar jest obiektem: `base` opisuje tekst i odstępy,
-a `square` padding dla wartości `true` i `false`. Rozmiar ikon wybiera Icon.
-Button nie potrzebuje biblioteki do wariantów.
+Style znajdują się w tym samym pliku `button.tsx`, w konfiguracji CVA `buttonStyles`.
+Mapy `color` i `variant` zawierają stringi klas. Mapa `size` określa rozmiar tekstu, odstępy i bok przycisku kwadratowego. Osobna mapa
+`square` określa proporcje i padding.
+Stałe klasy przycisku, ikon i licznika pozostają w JSX. Rozmiar ikon wybiera Icon.
+Button używa CVA do składania klas Tailwinda. Wariant jest wymagany, a domyślny kolor to `primary`.
 
 ## Jak czytać komponent
 
 | Vue | React w tym komponencie |
 | --- | --- |
 | Deklaracja propsów przez `defineProps` | Typ `ButtonProps` opisuje akceptowane propsy; sam typ nie sprawdza ich podczas działania aplikacji |
-| Wartości domyślne propsów | `type = "button"`, `size = "md"`, `color = "primary"` i `variant = "solid"` w parametrach funkcji |
+| Wartości domyślne propsów | `type = "button"` i `size = "md"` w parametrach funkcji |
 | `<template>` | JSX zwracany przez `return` |
 | Domyślny `<slot />` | `{children}` |
-| `v-if="icon"` | Icon sam zwraca `null`, gdy nie otrzyma nazwy |
-| `:class="..."` | `className={[...klasy].join(" ")}` — połączenie wybranych klas w jeden tekst |
+| `v-if="leadingIcon"` | Icon sam zwraca `null`, gdy nie otrzyma nazwy |
+| `:class="..."` | `className` ze szablonem tekstowym łączy wybrane klasy w jeden tekst |
 | `:disabled="isDisabled"` | `disabled={isDisabled}` w wywołaniu Buttona |
 | `@click="handleClick"` | `onClick={handleClick}` |
 
 Destrukturyzacja odczytuje konkretne wartości z obiektu propsów.
 Dzięki temu w funkcji piszemy `size` zamiast `props.size`.
-Znak `?` w typie, np. `icon?: string`, oznacza prop opcjonalny.
+Znak `?` w typie, np. `leadingIcon?: string`, oznacza prop opcjonalny.
 `ReactNode` oznacza treść, którą React może wyrenderować, np. tekst lub elementy JSX.
 
 Zapis `{...rest}` przekazuje pozostałe propsy do `<button>`, podobnie do
-`v-bind="$attrs"` w Vue. Własne propsy (`icon`, `trailingIcon`, `size`, `color`,
+`v-bind="$attrs"` w Vue. Własne propsy (`leadingIcon`, `trailingIcon`, `size`, `color`,
 `variant`, `square`) odczytujemy osobno, więc nie trafiają do HTML.
 
 Obiekt `styles` zawiera:
 
-- `base` — wspólny wygląd, kursor, przejścia, grubość obrysu fokusu i stan wyłączenia.
-- `icon` — wspólne style ikon.
-- `block` — klasy dla `true` i `false`: pełna szerokość i wyśrodkowanie treści razem z ikonami.
-- `loading` — klasy dla `true` i `false`: obrót lewej ikony podczas ładowania.
-- `variant` — wspólne klasy wariantów: `solid` ma `text-inverted`, `outline`
-  używa `bg-transparent`. `soft` i `ghost` nie wymagają wspólnych klas. `outline` i `subtle`
-  mają obrys w wybranym kolorze motywu o kryciu odpowiednio 50% i 25%.
-- `color` — `base` z kolorem obrysu fokusu oraz klasy konkretnego wariantu,
-  np. `styles.color.primary.outline`.
-- `size` — ustawienia danego rozmiaru: tekst, odstępy
-  oraz warunkowy padding dla `square`.
+- `color` — kolor tekstu i obrysu fokusu, np. `text-primary outline-primary/25`.
+- `variant` — sposób użycia koloru przez `currentColor`: tło, obrys i stany.
+- `size` — wielkość tekstu, odstępy i bok przycisku kwadratowego.
+- `square` — proporcje i padding, wspólne dla wszystkich rozmiarów.
+- `block` — pełna szerokość dla `true`, brak dodatkowych klas dla `false`.
 
 Funkcja dobiera klasy bez zmiennej pomocniczej:
 
 ```tsx
-className={[
-  styles.base,
-  styles.variant[variant],
-  styles.color[color].base,
-  styles.color[color][variant],
-  styles.size[size].base,
-  styles.size[size].square[square ? "true" : "false"],
-  styles.block[block ? "true" : "false"],
-  className,
-].join(" ")}
+<button
+  className={`
+    rounded-md font-medium inline-flex items-center justify-center cursor-pointer
+    transition-colors focus-visible:outline-3
+    disabled:cursor-not-allowed aria-disabled:cursor-not-allowed
+    disabled:opacity-75 aria-disabled:opacity-75
+    ${styles.color[color]}
+    ${styles.variant[variant]}
+    ${styles.size[size]}
+    ${styles.square[square ? "true" : "false"]}
+    ${styles.block[block ? "true" : "false"]}
+    ${className}
+  `}
+>
 ```
 
-`styles.color[color].base` wybiera wspólny kolor obrysu fokusu, np.
-`outline-primary/25`. Grubość `focus-visible:outline-3` jest we wspólnym
-`styles.base`, więc nie powtarzamy jej w każdym wariancie.
+`currentColor` oznacza bieżący kolor tekstu przycisku, ustawiany przez `color`.
+Wariant `solid` korzysta z niego jako tła. Wewnętrzny `<span>` otrzymuje
+`contents text-inverted`, dzięki czemu treść i ikony mają kolor odwrócony,
+a tło przycisku zachowuje wybrany kolor. W pozostałych wariantach span ma
+wyłącznie `contents` i dziedziczy kolor. `contents` nie tworzy dodatkowego pola
+układu: treść nadal korzysta z układu flex i odstępów przycisku.
 
-`styles.color[color][variant]` to zwykłe odczytanie z obiektu JavaScript.
-Przy `color="primary"` i `variant="outline"` oznacza `styles.color.primary.outline`.
-Tablica zbiera klasy, a `.join(" ")` oddziela je spacjami. Opcjonalny
-`className` bez wartości nie doda tekstu `undefined`. Sam `.join()` nie usuwa
-sprzecznych klas; kolejność wpisów w `className` nie gwarantuje ich nadpisania.
+Opcjonalny `className` bez wartości nie doda tekstu `undefined`.
+Szablon tekstowy nie usuwa sprzecznych klas; kolejność wpisów w `className`
+nie gwarantuje ich nadpisania.
 
 Rozmiary tekstu, odstępów i ikon oparto na
 [Button z Nuxt UI v4](https://github.com/nuxt/ui/blob/v4/src/theme/button.ts).
 Kolory pochodzą z globalnego `src/styles/theme.css`. To zgodność
 tych stylów i opisanych poniżej propsów, a nie pełne API `UButton`:
 komponent nie dodaje `loadingAuto`, avatarów ani grup przycisków. Przycisk z samą ikoną
-automatycznie korzysta z równego paddingu przez `square`.
+automatycznie otrzymuje styl `square`.
 
-Kolory przycisku korzystają wyłącznie z istniejących zmiennych globalnego
-motywu `src/styles/theme.css`, importowanego przez `src/styles/index.css`.
-Używamy czytelnych klas Tailwinda odpowiadających kolorom z `@theme`:
+Prop `color` wybiera klasę tekstu z globalnego motywu, np. `text-success`.
+Wariant `solid` ustawia kolor tekstu przez `text-inverted!`, a `compoundVariants`
+dobiera klasę tła dla wybranego koloru, np. `bg-success`. Pozostałe warianty
+korzystają z koloru tekstu przez `currentColor`.
+Warianty `outline` i `subtle` mają wewnętrzną obwódkę `inset-ring` w kolorze
+tekstu, odpowiednio o kryciu 50% i 25%. Przy `focus-visible` obwódka ma pełne
+krycie. We wszystkich wariantach obrys fokusu ma grubość 3 px, krycie 25%
+i zerowy odstęp. W `solid` obrys używa koloru tła, a w pozostałych wariantach
+koloru tekstu (`currentColor`).
 
-| Prop `color` | Zmienna CSS | Przykładowa klasa |
+| Wariant | Tło | Tło po najechaniu |
 | --- | --- | --- |
-| `primary` | `--color-primary` | `bg-primary` |
-| `secondary` | `--color-secondary` | `bg-secondary` |
-| `success` | `--color-success` | `bg-success` |
-| `info` | `--color-info` | `bg-info` |
-| `warning` | `--color-warning` | `bg-warning` |
-| `error` | `--color-error` | `bg-error` |
+| `solid` | Wybrany kolor | Wybrany kolor / 90% dla aktywnego przycisku |
+| `outline`, `ghost` | Przezroczyste | Wybrany kolor / 10% |
+| `soft`, `subtle` | Wybrany kolor / 10% | Wybrany kolor / 20% |
 
-Wariant `solid` używa `text-inverted`, odpowiadającego `--text-color-inverted`.
-Pozostałe warianty używają koloru wybranego propem, np. `text-primary`.
-Obrys fokusu też korzysta z tego koloru przy kryciu 25%, np. `outline-primary/25`.
-Jak w [Nuxt UI](https://github.com/nuxt/ui/blob/v4/src/theme/button.ts), `outline`
-ma obrys `ring-primary/50`, a `subtle` delikatniejszy `ring-primary/25`.
-Focus klawiatury wzmacnia ich obrys do `focus-visible:ring-primary`.
-
-W hover i active zmienia się krycie wybranego koloru z `@theme`, jak
-w kolorowych wariantach Nuxt UI. Przykład dla `color="primary"`:
-
-| Wariant | Tło | Hover, active i disabled |
-| --- | --- | --- |
-| `solid` | `bg-primary` | `bg-primary/75` |
-| `outline` | Przezroczyste | `bg-primary/10` |
-| `soft`, `subtle` | `bg-primary/10` | `bg-primary/15` |
-| `ghost` | Bez własnego tła | `bg-primary/10` |
-
-Końcówki `/75`, `/10` i `/15` określają krycie samego koloru tła.
-Tekst i ikony pozostają nieprzezroczyste. Nadal korzystamy z tego samego
-koloru z motywu, np. `--color-primary`, bez odwołań do palet `blue` czy `slate`.
-`disabled`, `loading` i timeout używają tego samego koloru tła co hover
-danego wariantu. Nie zmniejszamy krycia całego przycisku.
+Końcówki `/90`, `/10` i `/20` określają krycie koloru tła.
+Atrybut `disabled` zmniejsza krycie całego przycisku do 75%.
 Nazwy klas są zapisane w całości w obiekcie. Zmienne z `light-dark()` dobierają
 kolory w jasnym i ciemnym motywie.
 
 ```tsx
-<Button color="success" label="Zapisano" />
+<Button variant="solid" color="success" label="Zapisano" />
 <Button color="error" variant="outline" label="Usuń" />
 ```
 
-## Padding przycisku z samą ikoną
+## Proporcje przycisku z samą ikoną
 
-`square` oznacza równy padding z każdej strony. Domyślna wartość zależy od
+`square` zachowuje równy padding w obu osiach. Domyślna wartość zależy od
 `children`, czyli odpowiednika domyślnego slotu Vue:
 
 ```tsx
@@ -144,37 +125,17 @@ Liczba `0` jest treścią i zachowuje zwykły padding. Komponent nie analizuje
 zawartości elementów JSX; dla ikony przekazanej przez `children` ustaw `square`.
 
 ```tsx
-<Button icon="menu">Menu</Button>                       // md: 10 px poziomo, 6 px pionowo
-<Button icon="menu" aria-label="Menu" />                // md: 6 px z każdej strony
-<Button icon="menu" square={false} aria-label="Menu" /> // zwykły padding
+<Button color="primary" variant="solid" leadingIcon="menu">Menu</Button>
+<Button color="primary" variant="solid" leadingIcon="menu" aria-label="Menu" />
+<Button color="primary" variant="solid" leadingIcon="menu" square={false} aria-label="Menu" />
 ```
 
-Możesz jawnie ustawić `square={true}` lub skrótowo `square`, również przy
-obecności `children`. Dla `xs` równy padding wynosi 4 px, `sm` i `md` 6 px,
-a `lg` i `xl` 8 px przy domyślnej skali Tailwinda.
-Padding wybieramy bezpośrednio z obiektu rozmiaru:
-
-```tsx
-styles.size[size].square[square ? "true" : "false"]
-```
-
-Dla `size="md"` i `square={true}` odczytujemy `styles.size.md.square.true`.
-Wybieramy wyłącznie jeden zestaw paddingów, dzięki czemu klasy nie konkurują
-ze sobą w CSS.
+Możesz jawnie ustawić `square`, również przy obecności `children`.
+W trybie `square` padding z `size` jest taki sam w obu osiach.
+Dla `square={false}` padding poziomy wynosi `0.8em`.
+Opcja `block` niezależnie ustawia pełną szerokość kontenera.
 
 ## Rozmiar ikon
-
-Ustawienia tekstu, odstępów i paddingu znajdują się razem, np.:
-
-```tsx
-md: {
-  base: "text-sm gap-1.5",
-  square: {
-    true: "p-1.5",
-    false: "px-2.5 py-1.5",
-  },
-},
-```
 
 Button przekazuje rozmiar przez `size`, a dodatkowe style przez `className`:
 
@@ -182,16 +143,16 @@ Button przekazuje rozmiar przez `size`, a dodatkowe style przez `className`:
 <Icon
   name={trailingIcon}
   size={size}
-  className={styles.icon.base}
+  className="shrink-0"
 />
 ```
 
-`styles.icon.base` zawiera `shrink-0`, więc ikona nie kurczy się w układzie
+`shrink-0` jest zapisane bezpośrednio w JSX, więc ikona nie kurczy się w układzie
 flex. Icon wybiera rozmiar z własnego `styles.size`, bez powielania mapy w Buttonie.
 Własnej ikonie przekazanej przez `children` ustawiasz `size` bezpośrednio;
 pozostałe style przekazujesz w jej `className`, podobnie jak w samodzielnym Iconie.
 Zwykłe elementy treści, np. licznik w `<span>`, pozostają bez zmian.
-Nie używamy selektorów opartych na atrybutach danych.
+Rozmiar ikon zależy od `size`.
 
 | `size` przycisku | Rozmiar obu ikon |
 | --- | --- |
@@ -206,7 +167,7 @@ Nie używamy selektorów opartych na atrybutach danych.
 W Vue:
 
 ```vue
-<Button icon="shopping-bag">Dodaj do koszyka</Button>
+<Button color="primary" variant="solid" leadingIcon="shopping-bag">Dodaj do koszyka</Button>
 ```
 
 W React:
@@ -215,14 +176,14 @@ W React:
 import Button from "@/components/ui/button";
 
 export default function Example() {
-  return <Button icon="shopping-bag">Dodaj do koszyka</Button>;
+  return <Button color="primary" variant="solid" leadingIcon="shopping-bag">Dodaj do koszyka</Button>;
 }
 ```
 
 Treść między znacznikami trafia do `children`. Może zawierać również elementy:
 
 ```tsx
-<Button variant="soft">
+<Button color="primary" variant="soft">
   Koszyk
   <span className="rounded-full bg-muted px-2">3</span>
 </Button>
@@ -234,8 +195,8 @@ Treść między znacznikami trafia do `children`. Może zawierać również elem
 podobnie jak domyślny slot w Nuxt UI:
 
 ```tsx
-<Button label="Zapisz" />
-<Button label="Zapasowa etykieta">Własna treść</Button>
+<Button color="primary" variant="solid" label="Zapisz" />
+<Button color="primary" variant="solid" label="Zapasowa etykieta">Własna treść</Button>
 ```
 
 Treść renderujemy przez `{children ?? label}`. Operator `??` wybiera `label`,
@@ -243,57 +204,48 @@ gdy `children` jest `null` lub `undefined`. Nie dodajemy elementu opakowującego
 ani dodatkowych stylów. `children` może nadal zawierać dowolny JSX.
 
 ```tsx
-<Button label="Dodaj do koszyka" block />
-<Button label="Menu" block trailingIcon="menu" />
-<Button label="Zapisywanie" loading />
+<Button color="primary" variant="solid" label="Dodaj do koszyka" block />
+<Button color="primary" variant="solid" label="Menu" block trailingIcon="menu" />
 ```
 
-`block` ustawia `w-full justify-center`. Prawa ikona pozostaje bezpośrednio
-za `label` lub `children`, z odstępem `gap` wybranego rozmiaru. `loading` zastępuje lewą ikonę
-obrotową ikoną `loader-circle`, zachowuje etykietę i prawą ikonę oraz
-ustawia `disabled`. Dodatkowo `aria-busy` informuje o trwającym ładowaniu.
-Stan `loading` przekazuje rodzic, np. z `useState`; komponent nie uruchamia
-ładowania automatycznie po kliknięciu.
-
-Style stanów są jawnymi obiektami:
+`block` ustawia `w-full`. Treść przycisku jest zawsze domyślnie wyśrodkowana.
+Stan zapisywania obsługuje ekran. Podaje ikonę, blokuje ponowne kliknięcie
+i przekazuje `aria-busy`. Obrót `loader-circle` jest zapisany w SVG.
 
 ```tsx
-block: {
-  true: "w-full justify-center",
-  false: "",
-},
-loading: {
-  true: "animate-spin",
-  false: "",
-},
+<Button
+  color="primary"
+  variant="solid"
+  label="Zapisz"
+  icon={saving ? "loader-circle" : "shopping-bag"}
+  disabled={saving}
+  aria-busy={saving}
+/>
 ```
 
-Przycisk otrzymuje klasy z `styles.block`, a wyłącznie lewa ikona — z
-`styles.loading`. Klucz wybieramy operatorem `warunek ? "true" : "false"`.
-Prawa ikona pozostaje nieruchoma podczas ładowania.
 
 ## Timeout
 
 `timeout?: number` określa czas blokady w sekundach. Odliczanie zaczyna się
-po zamontowaniu komponentu. Przykład: `<Button timeout={5} label="Kontynuuj" />`.
+po zamontowaniu komponentu. Przykład: `<Button color="primary" variant="solid" timeout={5} label="Kontynuuj" />`.
 Podczas blokady dodatkowy `<span>` między lewą ikoną a `children` lub `label`
 pokazuje kolejno `5`, `4`, `3`, `2`, `1`. Po zakończeniu licznik znika.
-Podczas odliczania lewą ikonę zastępuje nieruchomy zegar `clock`, również
-gdy ustawiono `loading`. Po zakończeniu wraca spinner lub ikona z `icon`.
+Podczas odliczania lewą ikonę zastępuje nieruchomy zegar `clock`.
 
 Przekazujemy pełne, nieujemne sekundy. Brak wartości lub `0` wyłącza timeout.
 `timeout` określa czas początkowy; zmiana propa nie restartuje odliczania. Ponowne zamontowanie
 komponentu rozpoczyna nowe odliczanie. Timer jest sprzątany przy zmianie
 licznika lub odmontowaniu, a po zakończeniu nie jest ponownie uruchamiany.
-Zakończenie timeoutu nie usuwa blokady wynikającej z `disabled` lub `loading`.
+Zakończenie timeoutu nie usuwa blokady wynikającej z `disabled`.
 
 ## Disabled i kursor
 
-Aktywny przycisk ma `cursor-pointer`. `disabled`, `loading` oraz trwający timeout ustawiają
+Aktywny przycisk ma `cursor-pointer`. `disabled` ustawia
 natywny atrybut `disabled`, który blokuje kliknięcie i wysłanie formularza
-przez ten przycisk. Stan wyłączenia ma `cursor-not-allowed` oraz takie samo
-tło jak hover, również po najechaniu na wyłączony przycisk. Kolory tekstu
-i obrysu wynikają z wariantu. Dotychczasowe style hover i active pozostają zachowane.
+przez ten przycisk. Stan wyłączenia ma `cursor-not-allowed`, krycie 75%
+i standardowe tło danego wariantu, również po najechaniu. Kolory tekstu
+i obrysu wynikają z wariantu. Przykłady wszystkich nieaktywnych wariantów
+znajdują się w sekcji „Nieaktywne warianty” na `/design-system`.
 
 Samo `aria-disabled` opisuje stan i włącza style, ale natywnie nie blokuje
 kliknięć — do wyłączenia tego przycisku używaj `disabled`.
@@ -319,7 +271,7 @@ export default function Counter() {
     setCount(count + 1);
   }
 
-  return <Button onClick={handleClick}>Kliknięcia: {count}</Button>;
+  return <Button color="primary" variant="solid" onClick={handleClick}>Kliknięcia: {count}</Button>;
 }
 ```
 
@@ -341,12 +293,11 @@ przekazujemy bezpośrednio z komponentu serwerowego do komponentu klienckiego.
 | `children` | Treść przycisku (`ReactNode`), ma pierwszeństwo przed `label` | — |
 | `label` | Etykieta tekstowa | — |
 | `block` | Pełna szerokość | `false` |
-| `loading` | Spinner i wyłączenie przycisku | `false` |
 | `timeout` | Czas blokady w sekundach (`number`), odliczany od zamontowania | `0` |
-| `icon`, `trailingIcon` | Nazwa ikony przed lub za treścią | — |
+| `leadingIcon`, `trailingIcon` | Nazwa ikony przed lub za treścią | — |
 | `size` | `xs`, `sm`, `md`, `lg`, `xl` | `md` |
 | `color` | `primary`, `secondary`, `success`, `info`, `warning`, `error` | `primary` |
-| `square` | Równy padding z każdej strony | Automatycznie przy braku treści |
+| `square` | Równy padding w obu osiach | Automatycznie przy braku treści |
 | `variant` | `solid`, `outline`, `soft`, `subtle`, `ghost` | `solid` |
 | `type` | `button`, `submit`, `reset` | `button` |
 | `disabled` | `boolean` | `false` |
@@ -364,7 +315,7 @@ Button zawsze renderuje `<button>`.
 Przycisk z samą ikoną musi mieć nazwę:
 
 ```tsx
-<Button icon="menu" aria-label="Menu" />
+<Button color="primary" variant="solid" leadingIcon="menu" aria-label="Menu" />
 ```
 
 ## Ikony
@@ -377,5 +328,5 @@ Nieznana nazwa ikony powoduje, że ikona nie jest renderowana.
 ## Użycie w modalu
 
 Wspólny Button służy również do akcji w stopce Modala. Dla akcji destrukcyjnych
-ustaw `color="error"`, zachowując domyślny wariant `solid`. Przykłady:
+ustaw `color="error"`, z wariantem `solid`. Przykłady:
 `src/components/design-system/modal-showcase.tsx` oraz [Modal](./modal.md).

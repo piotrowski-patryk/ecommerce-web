@@ -1,191 +1,130 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { cva } from "class-variance-authority";
 import Icon from "@/components/ui/icon";
+
+type ButtonIcons = string | {
+  start?: string;
+  end?: string;
+};
 
 type ButtonProps = React.ComponentProps<"button"> & {
   label?: string;
-  block?: boolean;
-  loading?: boolean;
-  timeout?: number;
-  icon?: string;
-  trailingIcon?: string;
+  icon?: ButtonIcons;
+
   color?: "primary" | "secondary" | "success" | "info" | "warning" | "error";
   variant?: "solid" | "outline" | "soft" | "subtle" | "ghost";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   square?: boolean;
+  block?: boolean;
 };
 
-const styles = {
-  base: "rounded-md font-medium inline-flex items-center cursor-pointer transition-colors focus-visible:outline-3 disabled:cursor-not-allowed aria-disabled:cursor-not-allowed",
-  icon: {
-    base: "shrink-0",
-  },
-  block: {
-    true: "w-full justify-center",
-    false: "",
-  },
-  loading: {
-    true: "animate-spin",
-    false: "",
-  },
-  timeout: {
-    base: "tabular-nums",
-  },
-  variant: {
-    solid: "text-inverted",
-    outline: "bg-transparent ring ring-inset",
-    soft: "",
-    subtle: "ring ring-inset",
-    ghost: "",
-  },
-  color: {
-    primary: {
-      base: "outline-primary/25",
-      solid: "bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary/75 aria-disabled:bg-primary/75",
-      outline: "text-primary ring-primary/50 focus-visible:ring-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-primary/10 aria-disabled:bg-primary/10",
-      soft: "text-primary bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/15 aria-disabled:bg-primary/15",
-      subtle: "text-primary ring-primary/25 focus-visible:ring-primary bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/15 aria-disabled:bg-primary/15",
-      ghost: "text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-primary/10 aria-disabled:bg-primary/10",
-    },
-    secondary: {
-      base: "outline-secondary/25",
-      solid: "bg-secondary hover:bg-secondary/75 active:bg-secondary/75 disabled:bg-secondary/75 aria-disabled:bg-secondary/75",
-      outline: "text-secondary ring-secondary/50 focus-visible:ring-secondary hover:bg-secondary/10 active:bg-secondary/10 disabled:bg-secondary/10 aria-disabled:bg-secondary/10",
-      soft: "text-secondary bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 disabled:bg-secondary/15 aria-disabled:bg-secondary/15",
-      subtle: "text-secondary ring-secondary/25 focus-visible:ring-secondary bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 disabled:bg-secondary/15 aria-disabled:bg-secondary/15",
-      ghost: "text-secondary hover:bg-secondary/10 active:bg-secondary/10 disabled:bg-secondary/10 aria-disabled:bg-secondary/10",
-    },
-    success: {
-      base: "outline-success/25",
-      solid: "bg-success hover:bg-success/75 active:bg-success/75 disabled:bg-success/75 aria-disabled:bg-success/75",
-      outline: "text-success ring-success/50 focus-visible:ring-success hover:bg-success/10 active:bg-success/10 disabled:bg-success/10 aria-disabled:bg-success/10",
-      soft: "text-success bg-success/10 hover:bg-success/15 active:bg-success/15 disabled:bg-success/15 aria-disabled:bg-success/15",
-      subtle: "text-success ring-success/25 focus-visible:ring-success bg-success/10 hover:bg-success/15 active:bg-success/15 disabled:bg-success/15 aria-disabled:bg-success/15",
-      ghost: "text-success hover:bg-success/10 active:bg-success/10 disabled:bg-success/10 aria-disabled:bg-success/10",
-    },
-    info: {
-      base: "outline-info/25",
-      solid: "bg-info hover:bg-info/75 active:bg-info/75 disabled:bg-info/75 aria-disabled:bg-info/75",
-      outline: "text-info ring-info/50 focus-visible:ring-info hover:bg-info/10 active:bg-info/10 disabled:bg-info/10 aria-disabled:bg-info/10",
-      soft: "text-info bg-info/10 hover:bg-info/15 active:bg-info/15 disabled:bg-info/15 aria-disabled:bg-info/15",
-      subtle: "text-info ring-info/25 focus-visible:ring-info bg-info/10 hover:bg-info/15 active:bg-info/15 disabled:bg-info/15 aria-disabled:bg-info/15",
-      ghost: "text-info hover:bg-info/10 active:bg-info/10 disabled:bg-info/10 aria-disabled:bg-info/10",
-    },
-    warning: {
-      base: "outline-warning/25",
-      solid: "bg-warning hover:bg-warning/75 active:bg-warning/75 disabled:bg-warning/75 aria-disabled:bg-warning/75",
-      outline: "text-warning ring-warning/50 focus-visible:ring-warning hover:bg-warning/10 active:bg-warning/10 disabled:bg-warning/10 aria-disabled:bg-warning/10",
-      soft: "text-warning bg-warning/10 hover:bg-warning/15 active:bg-warning/15 disabled:bg-warning/15 aria-disabled:bg-warning/15",
-      subtle: "text-warning ring-warning/25 focus-visible:ring-warning bg-warning/10 hover:bg-warning/15 active:bg-warning/15 disabled:bg-warning/15 aria-disabled:bg-warning/15",
-      ghost: "text-warning hover:bg-warning/10 active:bg-warning/10 disabled:bg-warning/10 aria-disabled:bg-warning/10",
-    },
-    error: {
-      base: "outline-error/25",
-      solid: "bg-error hover:bg-error/75 active:bg-error/75 disabled:bg-error/75 aria-disabled:bg-error/75",
-      outline: "text-error ring-error/50 focus-visible:ring-error hover:bg-error/10 active:bg-error/10 disabled:bg-error/10 aria-disabled:bg-error/10",
-      soft: "text-error bg-error/10 hover:bg-error/15 active:bg-error/15 disabled:bg-error/15 aria-disabled:bg-error/15",
-      subtle: "text-error ring-error/25 focus-visible:ring-error bg-error/10 hover:bg-error/15 active:bg-error/15 disabled:bg-error/15 aria-disabled:bg-error/15",
-      ghost: "text-error hover:bg-error/10 active:bg-error/10 disabled:bg-error/10 aria-disabled:bg-error/10",
-    },
-  },
-  size: {
-    xs: {
-      base: "text-xs gap-1",
+export const buttonStyles = cva(
+  "inline-flex items-center justify-center rounded-md font-medium cursor-pointer transition-colors focus-visible:outline-3 disabled:cursor-not-allowed disabled:opacity-75",
+  {
+    variants: {
+      color: {
+        primary: "text-primary",
+        secondary: "text-secondary",
+        success: "text-success",
+        info: "text-info",
+        warning: "text-warning",
+        error: "text-error",
+      },
+
+      variant: {
+        solid: "text-inverted!",
+        outline: "inset-ring inset-ring-current/50 outline-current/25 enabled:hover:bg-current/10 focus-visible:inset-ring-current",
+        soft: "bg-current/10 outline-current/25 enabled:hover:bg-current/20",
+        subtle: "inset-ring inset-ring-current/25 bg-current/10 outline-current/25 enabled:hover:bg-current/20 focus-visible:inset-ring-current",
+        ghost: "outline-current/25 enabled:hover:bg-current/10",
+      },
+
+      size: {
+        xs: "text-xs gap-1 p-1",
+        sm: "text-xs gap-1.5 p-1.5",
+        md: "text-sm gap-1.5 p-1.5",
+        lg: "text-sm gap-2 p-2",
+        xl: "text-base gap-2 p-2",
+      },
+
       square: {
-        true: "p-1",
-        false: "px-2 py-1",
+        true: "shrink-0",
+        false: "px-[0.8em]",
+      },
+
+      block: {
+        true: "w-full",
       },
     },
-    sm: {
-      base: "text-xs gap-1.5",
-      square: {
-        true: "p-1.5",
-        false: "px-2.5 py-1.5",
+
+    compoundVariants: [
+      {
+        variant: "solid",
+        color: "primary",
+        className: "bg-primary outline-primary/25 enabled:hover:bg-primary/90",
       },
-    },
-    md: {
-      base: "text-sm gap-1.5",
-      square: {
-        true: "p-1.5",
-        false: "px-2.5 py-1.5",
+      {
+        variant: "solid",
+        color: "secondary",
+        className: "bg-secondary outline-secondary/25 enabled:hover:bg-secondary/90",
       },
-    },
-    lg: {
-      base: "text-sm gap-2",
-      square: {
-        true: "p-2",
-        false: "px-3 py-2",
+      {
+        variant: "solid",
+        color: "success",
+        className: "bg-success outline-success/25 enabled:hover:bg-success/90",
       },
-    },
-    xl: {
-      base: "text-base gap-2",
-      square: {
-        true: "p-2",
-        false: "px-3 py-2",
+      {
+        variant: "solid",
+        color: "info",
+        className: "bg-info outline-info/25 enabled:hover:bg-info/90",
       },
-    },
+      {
+        variant: "solid",
+        color: "warning",
+        className: "bg-warning outline-warning/25 enabled:hover:bg-warning/90",
+      },
+      {
+        variant: "solid",
+        color: "error",
+        className: "bg-error outline-error/25 enabled:hover:bg-error/90",
+      },
+    ],
   },
-};
+);
 
 export default function Button({
   children,
   label,
   icon,
-  trailingIcon,
-  disabled = false,
-  loading = false,
-  timeout: initialTimeout = 0,
+
   color = "primary",
   variant = "solid",
   size = "md",
-  square = !label && (children == null || typeof children === "boolean" || children === ""),
-  block = false,
-  type = "button",
+  square = !label && (children == null || children === "" || typeof children === "boolean"),
+  block,
   className,
+
+  type = "button",
   ...rest
 
 }: ButtonProps) {
-  
-  const [timeout, setRemaining] = useState(initialTimeout);
-
-  useEffect(() => {
-    if (timeout <= 0) return;
-    const timer = window.setTimeout(setRemaining, 1000, timeout - 1);
-    return () => window.clearTimeout(timer);
-  }, [timeout]);
+  if (typeof icon === "string") icon = { start: icon };
 
   return (
     <button
-      {...rest}
       type={type}
-      disabled={disabled || loading || timeout > 0}
-      aria-busy={loading || undefined}
-      className={[
-        styles.base,
-        styles.variant[variant],
-        styles.color[color].base,
-        styles.color[color][variant],
-        styles.size[size].base,
-        styles.size[size].square[square ? "true" : "false"],
-        styles.block[block ? "true" : "false"],
-        className,
-      ].join(" ")}
+      className={buttonStyles({ color, variant, size, square, block, className })}
+      {...rest}
     >
       <Icon
-        name={timeout > 0 ? "clock" : loading ? "loader-circle" : icon}
+        name={icon?.start}
         size={size}
-        className={[
-          styles.icon.base,
-          styles.loading[loading && timeout <= 0 ? "true" : "false"],
-        ].join(" ")}
       />
-      {timeout > 0 && <span className={styles.timeout.base}>{timeout}</span>}
+
       {children ?? label}
+
       <Icon
-        name={trailingIcon}
+        name={icon?.end}
         size={size}
-        className={styles.icon.base}
       />
     </button>
   );

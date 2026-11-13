@@ -1,99 +1,89 @@
-"use client";
+import { cva } from "class-variance-authority";
+import Icon from "@/components/ui/icon";
 
-import { useId, useState, type ComponentPropsWithRef, type ReactNode } from "react";
-
-type BaseInputProps = Omit<ComponentPropsWithRef<"input">, "type"> & {
-  label: string;
-  hint?: string;
-  error?: string;
-  leadingIcon?: ReactNode;
+type InputIcons = string | {
+  start?: string;
+  end?: string;
 };
 
-export type InputProps = BaseInputProps &
-  (
-    | { type: "password"; trailingIcon?: never }
-    | { type?: "text" | "email" | "search"; trailingIcon?: ReactNode }
-  );
+type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
+  type?: "text" | "email" | "search" | "password";
+  icon?: InputIcons;
 
-export function Input({
-  type = "text",
-  label,
-  hint,
-  error,
-  leadingIcon,
-  trailingIcon,
-  id,
+  color?: "primary" | "secondary" | "success" | "info" | "warning" | "error";
+  variant?: "outline" | "soft" | "subtle" | "ghost" | "none";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  block?: boolean;
+};
+
+export const inputStyles = cva(
+  "inline-flex min-w-0 items-center rounded-md px-3 outline-3 outline-offset-0 outline-current/25 outline-none transition-colors has-disabled:cursor-not-allowed has-disabled:opacity-75 has-aria-invalid:border has-aria-invalid:border-current has-aria-invalid:text-error",
+  {
+    variants: {
+      color: {
+        primary: "text-primary",
+        secondary: "text-secondary",
+        success: "text-success",
+        info: "text-info",
+        warning: "text-warning",
+        error: "text-error",
+      },
+
+      variant: {
+        outline: "border border-default bg-default has-focus-visible:border-current has-focus-visible:outline-solid",
+        soft: "bg-muted has-focus-visible:outline-solid",
+        subtle: "border border-default bg-muted has-focus-visible:border-current has-focus-visible:outline-solid",
+        ghost: "bg-transparent focus-within:bg-muted has-read-write:hover:bg-muted has-focus-visible:outline-solid",
+        none: "bg-transparent",
+      },
+
+      size: {
+        xs: "gap-1 py-1 text-xs",
+        sm: "gap-1.5 py-1.5 text-xs",
+        md: "gap-1.5 py-1.5 text-sm",
+        lg: "gap-2 py-2 text-sm",
+        xl: "gap-2 py-2 text-base",
+      },
+
+      block: {
+        true: "w-full",
+      },
+    },
+  },
+);
+
+export default function Input({
+  icon,
+
+  color = "primary",
+  variant = "outline",
+  size = "md",
+  block,
   className,
-  required,
-  disabled,
-  readOnly,
-  ...inputProps
+
+  type = "text",
+  ...rest
+
 }: InputProps) {
-  const generatedId = useId();
-  const inputId = id ?? generatedId;
-  const hintId = hint ? `${inputId}-hint` : undefined;
-  const errorId = error ? `${inputId}-error` : undefined;
-  const describedBy = [inputProps["aria-describedby"], hintId, errorId]
-    .filter(Boolean)
-    .join(" ") || undefined;
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const isPassword = type === "password";
+  if (typeof icon === "string") icon = { start: icon };
 
   return (
-    <div className={`ui-field ${className ?? ""}`}>
-      <label className="ui-field-label" htmlFor={inputId}>
-        {label}
-        {required && <span className="ui-field-required" aria-hidden="true"> *</span>}
-      </label>
-      <div className="ui-input-shell" data-invalid={Boolean(error)} data-disabled={Boolean(disabled)}>
-        {leadingIcon && <span className="ui-input-icon" aria-hidden="true">{leadingIcon}</span>}
-        <input
-          {...inputProps}
-          id={inputId}
-          type={isPassword && passwordVisible ? "text" : type}
-          required={required}
-          disabled={disabled}
-          readOnly={readOnly}
-          aria-invalid={error ? true : inputProps["aria-invalid"]}
-          aria-describedby={describedBy}
-          className="ui-input-control"
-        />
-        {isPassword ? (
-          <button
-            type="button"
-            className="ui-input-action"
-            onClick={() => setPasswordVisible((visible) => !visible)}
-            aria-label={passwordVisible ? "Ukryj hasło" : "Pokaż hasło"}
-            aria-pressed={passwordVisible}
-            aria-controls={inputId}
-            disabled={disabled}
-          >
-            {passwordVisible ? <EyeOpenIcon /> : <EyeClosedIcon />}
-          </button>
-        ) : trailingIcon ? (
-          <span className="ui-input-icon" aria-hidden="true">{trailingIcon}</span>
-        ) : null}
-      </div>
-      {hint && <p id={hintId} className="ui-field-hint">{hint}</p>}
-      {error && <p id={errorId} className="ui-field-error">{error}</p>}
+    <div className={inputStyles({ color, variant, size, block, className })}>
+      <Icon
+        name={icon?.start}
+        size={size}
+      />
+
+      <input
+        type={type}
+        className="min-w-0 flex-1 text-default outline-none placeholder:text-muted"
+        {...rest}
+      />
+
+      <Icon
+        name={icon?.end}
+        size={size}
+      />
     </div>
-  );
-}
-
-function EyeOpenIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
-      <circle cx="12" cy="12" r="2.5" />
-    </svg>
-  );
-}
-
-function EyeClosedIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <path d="M3 3 21 21M10.6 6.1A10.4 10.4 0 0 1 12 6c6 0 9.5 6 9.5 6a14 14 0 0 1-3.2 3.7M6.2 7.7A14.3 14.3 0 0 0 2.5 12s3.5 6 9.5 6c1 0 2-.2 2.8-.4" />
-      <path d="M10 10a2.8 2.8 0 0 0 4 4" />
-    </svg>
   );
 }

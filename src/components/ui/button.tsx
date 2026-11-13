@@ -32,9 +32,9 @@ export const buttonStyles = cva(
 
       variant: {
         solid: "text-inverted!",
-        outline: "inset-ring inset-ring-current/50 outline-current/25 enabled:hover:bg-current/10 focus-visible:inset-ring-current",
+        outline: "border border-current/50 outline-current/25 enabled:hover:bg-current/10 focus-visible:border-current",
         soft: "bg-current/10 outline-current/25 enabled:hover:bg-current/20",
-        subtle: "inset-ring inset-ring-current/25 bg-current/10 outline-current/25 enabled:hover:bg-current/20 focus-visible:inset-ring-current",
+        subtle: "border border-current/25 bg-current/10 outline-current/25 enabled:hover:bg-current/20 focus-visible:border-current",
         ghost: "outline-current/25 enabled:hover:bg-current/10",
       },
 

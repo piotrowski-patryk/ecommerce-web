@@ -1,37 +1,41 @@
-import clock from "@/assets/icons/clock.svg?raw";
-import loaderCircle from "@/assets/icons/loader-circle.svg?raw";
-import menu from "@/assets/icons/menu.svg?raw";
-import shoppingBag from "@/assets/icons/shopping-bag.svg?raw";
-import arrowLeft from "@/assets/icons/arrow-left.svg?raw";
+import { cva } from "class-variance-authority";
 
 type IconProps = React.ComponentProps<"span"> & {
   name?: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 };
 
-const styles = {
-  base: "inline-flex fill-none stroke-current stroke-2 [&>svg]:size-full",
-  size: {
-    xs: "size-4",
-    sm: "size-4",
-    md: "size-5",
-    lg: "size-5",
-    xl: "size-6",
+const iconStyles = cva(
+  "inline-flex shrink-0 fill-none stroke-current stroke-2 [&>svg]:size-full",
+  {
+    variants: {
+      size: {
+        xs: "size-4",
+        sm: "size-4",
+        md: "size-5",
+        lg: "size-5",
+        xl: "size-6",
+      },
+    },
   },
-};
+);
 
-const icons: Record<string, string> = {
-  clock,
-  "loader-circle": loaderCircle,
-  menu,
-  "shopping-bag": shoppingBag,
-  "arrow-left": arrowLeft,
-};
+const icons = import.meta.glob<string>("*.svg", {
+  base: "../../assets/icons",
+  eager: true,
+  import: "default",
+  query: "?raw",
+});
 
-export default function Icon({ name, size = "xl", className, ...rest }: IconProps) {
-  if (!name) return null;
+export default function Icon({
+  name,
+  size = "md",
+  className,
 
-  const svg = Object.hasOwn(icons, name) ? icons[name] : undefined;
+  ...rest
+
+}: IconProps) {
+  const svg = name ? icons[`./${name}.svg`] : undefined;
 
   if (!svg) return null;
 
@@ -39,7 +43,7 @@ export default function Icon({ name, size = "xl", className, ...rest }: IconProp
     <span
       {...rest}
       aria-hidden="true"
-      className={[styles.base, styles.size[size], className].join(" ")}
+      className={iconStyles({ size, className })}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

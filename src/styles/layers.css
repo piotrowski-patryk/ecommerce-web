@@ -1,0 +1,24 @@
+@layer base {
+  :root {
+    --header-height: 4rem;
+    color-scheme: light dark;
+  }
+
+  :root:has(#design-system-root) {
+    color-scheme: light;
+  }
+
+  body {
+    background: var(--background-color-default);
+    color: var(--text-color-default);
+    font-family: var(--font-poppins);
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--text-color-strong);
+  }
+}

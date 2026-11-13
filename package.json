@@ -1,0 +1,38 @@
+{
+  "name": "ecommerce-web",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Platforma e-commerce łącząca panel klienta z narzędziami do zarządzania sklepem",
+  "keywords": [
+    "ecommerce",
+    "nextjs",
+    "react",
+    "typescript",
+    "tailwindcss"
+  ],
+  "license": "UNLICENSED",
+  "author": "Patryk Piotrowski",
+  "scripts": {
+    "dev": "next dev --port 3030",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
